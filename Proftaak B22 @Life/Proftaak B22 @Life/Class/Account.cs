@@ -2,8 +2,9 @@
 {
     internal class Account
     {
-        private string account_id;
-        private string email;
-        private string wachtwoord;
+        //AutoProperty generates private field for us
+        public string account_id { get; }
+        public string email { get; set; }
+        public string wachtwoord { get; set; }
     }
 }
