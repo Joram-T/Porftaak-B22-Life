@@ -9,9 +9,9 @@ namespace Proftaak_B22__Life.Class
     class Product
     {
         //AutoProperty generates private field for us
-        public int product_id { get; }
-        public string name { get; set; }
-        public string description { get; set; }       
+        public int ID { get; }
+        public string Name { get; set; }
+        public string Description { get; set; }       
         public decimal Price { get; set; }
     }
 }
