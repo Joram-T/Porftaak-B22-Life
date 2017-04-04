@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proftaak_B22__Life.DatabaseContext;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,22 @@ namespace Proftaak_B22__Life
     /// </summary>
     public partial class MainWindow : Window
     {
+        AccountSQLContext accountContext = new AccountSQLContext();
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if (accountContext.Login(tbEmail.Text, tbWachtwoord.Text) != null)
+            {
+                MessageBox.Show("Juist");
+            }
+            else
+            {
+                MessageBox.Show("Onjuist");
+            }
         }
     }
 }
