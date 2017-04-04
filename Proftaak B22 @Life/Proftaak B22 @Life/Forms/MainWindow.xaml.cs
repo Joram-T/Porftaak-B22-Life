@@ -29,7 +29,7 @@ namespace Proftaak_B22__Life
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (accountContext.Login(tbEmail.Text, tbWachtwoord.Text) != null)
+            if (accountContext.Login(tbEmail.Text, tbWachtwoord.Password) != null)
             {
                 MessageBox.Show("Juist");
             }
