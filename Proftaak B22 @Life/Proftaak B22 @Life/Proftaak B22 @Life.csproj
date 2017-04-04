@@ -64,7 +64,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Class\Database.cs" />
+    <Compile Include="DatabaseContext\Database.cs" />
     <Compile Include="Class\Klant.cs" />
     <Compile Include="Class\Product.cs" />
     <Compile Include="Class\User.cs" />

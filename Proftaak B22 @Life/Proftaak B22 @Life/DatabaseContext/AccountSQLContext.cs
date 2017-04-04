@@ -23,7 +23,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     {
                         while (reader.Read())
                         {
-                            
+                            return CreateAccountFromReader(reader);
                         }
                         return null;
                     }
