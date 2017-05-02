@@ -12,7 +12,7 @@ namespace Proftaak_B22__Life.Class
         /// <summary>
         /// In this class the connection between C# and MSSQL is created
         /// </summary>
-        private static readonly string connectionString = "Server=mssql.fhict.local;Database=dbi319198;User Id=dbi319198;Password=apenkop35;";
+        private static readonly string connectionString = "Server=mssql.fhict.local;Database=dbi347664;User Id=dbi347664;Password=gekmoeilijkwachtwoord;";
         public static SqlConnection Connection
         {
             get
