@@ -12,5 +12,6 @@
                 <DropShadowEffect/>
             </ListBox.Effect>
         </ListBox>
+        <Label x:Name="lblNaam" Content="" HorizontalAlignment="Left" Margin="331,10,0,0" VerticalAlignment="Top" Height="72" Width="197" FontSize="48"/>
     </Grid>
 </Window>

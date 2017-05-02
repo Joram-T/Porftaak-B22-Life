@@ -20,14 +20,29 @@ namespace Proftaak_B22__Life.Forms
     /// </summary>
     public partial class MedewerkerForm : Window
     {
-        MedewerkerSQLContext medewerkerContext = new MedewerkerSQLContext();
-        public MedewerkerForm()
+        private MedewerkerSQLContext medewerkerContext = new MedewerkerSQLContext();
+        private List<Window> actief;
+        public MedewerkerForm(List<Window> actief)
         {
             InitializeComponent();
             foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
             {
                 lb_Werknemers.Items.Add(m.ToString());
             }
+            this.actief = actief;
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            Window wi = new Window();
+            foreach (Window w in actief)
+            {
+                if (w.GetType() == this.GetType())
+                {
+                    wi = w;
+                }
+            }
+            actief.Remove(wi);
         }
     }
 }
