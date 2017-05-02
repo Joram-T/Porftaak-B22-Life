@@ -31,6 +31,26 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
         }
 
+        public Account GetAccountByID(int id)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "SELECT * FROM Account WHERE account_id = @account_id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@account_id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            return CreateAccountFromReader(reader);
+                        }
+                        return null;
+                    }
+                }
+            }
+        }
+
 
         public Account CreateAccountFromReader(SqlDataReader reader)
         {

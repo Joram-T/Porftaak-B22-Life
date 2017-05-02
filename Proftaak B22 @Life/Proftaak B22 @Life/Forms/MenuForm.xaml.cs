@@ -76,5 +76,12 @@ namespace Proftaak_B22__Life.Forms
             }
             return true;
         }
+
+        private void btnWerknemers_Click(object sender, RoutedEventArgs e)
+        {
+            MedewerkerForm wf = new MedewerkerForm();
+            wf.Show();
+            this.Close();
+        }
     }
 }
