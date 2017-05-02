@@ -91,6 +91,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\MenuForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\RoosterForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -100,6 +104,9 @@
     <Compile Include="Class\Medewerker.cs" />
     <Compile Include="Forms\MedewerkerForm.xaml.cs">
       <DependentUpon>MedewerkerForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MenuForm.xaml.cs">
+      <DependentUpon>MenuForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\RoosterForm.xaml.cs">
       <DependentUpon>RoosterForm.xaml</DependentUpon>

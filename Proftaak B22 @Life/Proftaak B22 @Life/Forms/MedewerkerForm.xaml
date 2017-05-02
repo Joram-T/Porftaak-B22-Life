@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Proftaak_B22__Life.Forms"
         mc:Ignorable="d"
-        Title="MedewerkerForm" Height="300" Width="300">
-    <Grid>
-        
+        Title="MedewerkerForm" Height="768" Width="1024">
+    <Grid Width="1024" Height="768">
+
     </Grid>
 </Window>

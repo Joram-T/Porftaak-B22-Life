@@ -31,11 +31,13 @@ namespace Proftaak_B22__Life
         {
             if (accountContext.Login(tbEmail.Text, tbWachtwoord.Password) != null)
             {
-                MessageBox.Show("Juist");
+                Proftaak_B22__Life.Forms.MenuForm mf = new Proftaak_B22__Life.Forms.MenuForm ();
+                mf.Show();
+                this.Close();
             }
             else
             {
-                MessageBox.Show("Onjuist");
+                MessageBox.Show("Onjuist Email of Wachtwoord");
             }
         }
     }

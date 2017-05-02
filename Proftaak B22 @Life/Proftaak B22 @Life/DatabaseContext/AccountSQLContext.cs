@@ -14,10 +14,10 @@ namespace Proftaak_B22__Life.DatabaseContext
         {
             using (SqlConnection connection = Database.Connection)
             {
-                string query = "SELECT * FROM Account WHERE email = @email AND wachtwoord = @password";
+                string query = "SELECT * FROM Account WHERE UPPER(email) = @email AND wachtwoord = @password";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@email", email);
+                    command.Parameters.AddWithValue("@email", email.ToUpper());
                     command.Parameters.AddWithValue("@password", password);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
