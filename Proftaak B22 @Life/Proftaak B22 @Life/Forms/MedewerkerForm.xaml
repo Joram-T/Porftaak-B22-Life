@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MedewerkerForm" Height="768" Width="1024">
     <Grid Width="1024" Height="768">
-
+        <ListBox x:Name="lb_Werknemers" Height="703" Margin="10,10,0,0" VerticalAlignment="Top" Width="271" HorizontalAlignment="Left" Foreground="Black">
+            <ListBox.Effect>
+                <DropShadowEffect/>
+            </ListBox.Effect>
+        </ListBox>
     </Grid>
 </Window>

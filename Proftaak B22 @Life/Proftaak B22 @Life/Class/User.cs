@@ -22,5 +22,10 @@ namespace Proftaak_B22__Life.Class
             this.Address = address;
             this.City = city;
         }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

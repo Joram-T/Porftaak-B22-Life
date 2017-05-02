@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proftaak_B22__Life.DatabaseContext;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,14 @@ namespace Proftaak_B22__Life.Forms
     /// </summary>
     public partial class MedewerkerForm : Window
     {
+        MedewerkerSQLContext medewerkerContext = new MedewerkerSQLContext();
         public MedewerkerForm()
         {
             InitializeComponent();
+            foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
+            {
+                lb_Werknemers.Items.Add(m.ToString());
+            }
         }
     }
 }
