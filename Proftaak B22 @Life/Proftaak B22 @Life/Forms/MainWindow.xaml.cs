@@ -40,10 +40,5 @@ namespace Proftaak_B22__Life
                 MessageBox.Show("Onjuist Email of Wachtwoord");
             }
         }
-
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
    }
 }

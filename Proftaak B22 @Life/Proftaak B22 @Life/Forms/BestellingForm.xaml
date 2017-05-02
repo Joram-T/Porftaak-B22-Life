@@ -7,6 +7,20 @@
         mc:Ignorable="d"
         Title="BestellingForm" Height="768" Width="1024">
     <Grid>
-        
+        <ListBox x:Name="lbGesloten" HorizontalAlignment="Left" Height="703" VerticalAlignment="Top" Width="200" Margin="10,41,0,-7"/>
+        <ListBox x:Name="lbOpen" HorizontalAlignment="Left" Height="704" VerticalAlignment="Top" Width="200" Margin="232,41,0,-8"/>
+        <Label x:Name="lblGesloten" Content="Gesloten Bestellingen" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblOpen" Content="Openstaande Bestellingen" HorizontalAlignment="Left" Margin="232,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblMedewerker" Content="Medewerker:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="530,50,0,0"/>
+        <Label x:Name="lblKlant" Content="Klant:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="530,100,0,0"/>
+        <Label x:Name="lblBestel" Content="Besteldatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="527,150,0,0"/>
+        <Label x:Name="lblLever" Content="Leverdatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="527,200,0,0"/>
+        <Label x:Name="lblbetaal" Content="Betaaldatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="530,250,0,0"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="688,54,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="688,104,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="688,154,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" Height="23" Margin="688,204,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" Height="23" Margin="688,254,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
     </Grid>
 </Window>
