@@ -44,5 +44,15 @@ namespace Proftaak_B22__Life.Forms
             }
             actief.Remove(wi);
         }
+
+        private void lb_Werknemers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selectedwerknemer = lb_Werknemers.SelectedItem.ToString();
+            int id = Convert.ToInt32(selectedwerknemer.Split(' ')[0]);
+            lblNaamWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Name;
+            lblAdreswerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Address;
+            lblStadWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).City;
+            
+        }
     }
 }

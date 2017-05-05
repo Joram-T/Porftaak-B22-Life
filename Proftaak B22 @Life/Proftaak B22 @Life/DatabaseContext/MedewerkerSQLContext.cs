@@ -30,6 +30,28 @@ namespace Proftaak_B22__Life.DatabaseContext
             return result;
         }
 
+
+        public Medewerker GetMedewerkerByID(int id)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "SELECT * FROM Medewerker WHERE medewerker_id = @medewerker_id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@medewerker_id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            return CreateMedewerkerFromReader(reader);
+                        }
+                        return null;
+                    }
+                }
+            }
+        }
+
+
         private Medewerker CreateMedewerkerFromReader(SqlDataReader reader)
         {
             AccountSQLContext accountContext = new AccountSQLContext();
