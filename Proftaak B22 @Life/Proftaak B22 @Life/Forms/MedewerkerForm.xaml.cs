@@ -48,7 +48,7 @@ namespace Proftaak_B22__Life.Forms
 
         private void lb_Werknemers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(selectedwerknemer))
+            if (lb_Werknemers.SelectedIndex != -1)
             {
                 selectedwerknemer = lb_Werknemers.SelectedItem.ToString();
                 int id = Convert.ToInt32(selectedwerknemer.Split(' ')[0]);
@@ -56,16 +56,15 @@ namespace Proftaak_B22__Life.Forms
                 lblAdreswerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Address;
                 lblStadWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).City;
             }
-            
         }
 
         private void tb_Search_GotFocus(object sender, RoutedEventArgs e)
         {
+            lb_Werknemers.SelectedIndex = -1;
             if (tb_Search.Text == "Search")
             {
                 tb_Search.Text = "";
             }
-                    
         }
 
         private void tb_Search_TextChanged(object sender, TextChangedEventArgs e)
