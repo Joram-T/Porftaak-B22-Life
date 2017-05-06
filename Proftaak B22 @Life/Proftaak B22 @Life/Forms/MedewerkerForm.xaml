@@ -20,7 +20,7 @@
             <Grid HorizontalAlignment="Left" Height="259" Margin="-6,3,0,-12.4" VerticalAlignment="Top" Width="317">
                 <TextBox x:Name="tbInsertMedNaam" HorizontalAlignment="Left" Height="26" Margin="114,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
                 <TextBox x:Name="tbInsertMedTussenvoegsel" HorizontalAlignment="Left" Margin="114,41,0,0" TextWrapping="Wrap" Width="59" Height="26" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbInsertMedAchternaam" HorizontalAlignment="Left" Margin="114,72,0,135" TextWrapping="Wrap" Width="193"/>
+                <TextBox x:Name="tbInsertMedAchternaam" HorizontalAlignment="Left" Margin="114,72,0,161" TextWrapping="Wrap" Width="193"/>
                 <TextBox x:Name="tbInsertMedEmail" HorizontalAlignment="Left" Height="26" Margin="114,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
                 <TextBox x:Name="tbInsertMedWachtwoord" HorizontalAlignment="Left" Height="26" Margin="114,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
                 <Label x:Name="label" Content="Naam" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>

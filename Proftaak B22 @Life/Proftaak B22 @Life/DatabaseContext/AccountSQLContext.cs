@@ -31,27 +31,6 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
         }
 
-        public int GetAccountIDByEmailAndPassword(string email, string password)
-        {
-            using (SqlConnection connection = Database.Connection)
-            {
-                string query = "SELECT * FROM Account WHERE UPPER(email) = @email AND wachtwoord = @password";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@email", email.ToUpper());
-                    command.Parameters.AddWithValue("@password", password);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            return Convert.ToInt32(reader["account_id"]);
-                        }
-                        return 0;
-                    }
-                }
-            }
-        }
-
         public Account GetAccountByID(int id)
         {
             using (SqlConnection connection = Database.Connection)

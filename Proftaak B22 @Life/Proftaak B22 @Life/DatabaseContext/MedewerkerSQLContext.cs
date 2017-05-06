@@ -55,11 +55,33 @@ namespace Proftaak_B22__Life.DatabaseContext
         {
             using (SqlConnection connection = Database.Connection)
             {
-                string query = "INSERT INTO Medewerker VALUES(@managerid, @accountid, @voornaam, @achternaam, @tussenvoegsel, @adres, @woonplaats)";
+                // eerst het account id krijgen van het laatst geinserte account
+                int LastAccountID = 0;
+                string query = "SELECT MAX(account_id) FROM Account";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@managerid", null);
-                    command.Parameters.AddWithValue("@accountid", null);
+                    try
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                LastAccountID = Convert.ToInt32(reader[0]);
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw e;
+                    }
+                }
+                    //daarna een medewerker inserten met het verkregen accountid
+                    query = "INSERT INTO Medewerker VALUES(@managerid, @accountid, @voornaam, @achternaam, @tussenvoegsel, @adres, @woonplaats)";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@managerid", DBNull.Value);
+                    command.Parameters.AddWithValue("@accountid", LastAccountID);
                     command.Parameters.AddWithValue("@voornaam", medewerker.FirstName);
                     command.Parameters.AddWithValue("@achternaam", medewerker.LastName);
                     command.Parameters.AddWithValue("@tussenvoegsel", medewerker.Insertion);
