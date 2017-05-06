@@ -13,5 +13,9 @@ namespace Proftaak_B22__Life
         public Medewerker(int id, Account account, string firstname, string insertion, string lastname, string address, string city): base(id, account, firstname, insertion, lastname, address, city)
         {
         }
+
+        public Medewerker(Account account, string firstname, string insertion, string lastname, string address, string city) : base(account, firstname, insertion, lastname, address, city)
+        {
+        }
     }
 }

@@ -16,22 +16,24 @@
         <Label x:Name="lblAdreswerknemer" Content="" HorizontalAlignment="Left" Margin="331,308,0,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="30"/>
         <Label x:Name="lblStadWerknemer" Content="" HorizontalAlignment="Left" Margin="331,377,0,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="30"/>
         <TextBox x:Name="tb_Search" HorizontalAlignment="Left" Height="34" Margin="10,10,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="271" FontSize="22" FontStyle="Italic" TextDecorations="{x:Null}" Opacity="0.5" BorderBrush="#FF0D0D0E" Background="{x:Null}" SelectionBrush="#FFA4A7AB" GotFocus="tb_Search_GotFocus" TextChanged="tb_Search_TextChanged"/>
-        <GroupBox x:Name="gbMedewerkerToevoegen" Header="Medewerker toevoegen" HorizontalAlignment="Left" Margin="10,446,0,0" VerticalAlignment="Top" Height="252" Width="330">
-            <Grid HorizontalAlignment="Left" Height="233" Margin="-6,3,-51.8,-6.4" VerticalAlignment="Top" Width="317">
+        <GroupBox x:Name="gbMedewerkerToevoegen" Header="Medewerker toevoegen" HorizontalAlignment="Left" Margin="10,446,0,0" VerticalAlignment="Top" Height="272" Width="330">
+            <Grid HorizontalAlignment="Left" Height="259" Margin="-6,3,0,-12.4" VerticalAlignment="Top" Width="317">
                 <TextBox x:Name="tbInsertMedNaam" HorizontalAlignment="Left" Height="26" Margin="114,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
-                <TextBox x:Name="tbInsertMedTussenvoegsel" HorizontalAlignment="Left" Margin="114,41,0,0" TextWrapping="Wrap" Width="193" Height="26" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbInsertMedTussenvoegsel" HorizontalAlignment="Left" Margin="114,41,0,0" TextWrapping="Wrap" Width="59" Height="26" VerticalAlignment="Top"/>
                 <TextBox x:Name="tbInsertMedAchternaam" HorizontalAlignment="Left" Margin="114,72,0,135" TextWrapping="Wrap" Width="193"/>
                 <TextBox x:Name="tbInsertMedEmail" HorizontalAlignment="Left" Height="26" Margin="114,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
-                <TextBox x:Name="textBox_Copy4" HorizontalAlignment="Left" Height="26" Margin="114,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
+                <TextBox x:Name="tbInsertMedWachtwoord" HorizontalAlignment="Left" Height="26" Margin="114,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
                 <Label x:Name="label" Content="Naam" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="label_Copy" Content="Tussenvoegsel" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="lblAchternaam" Content="Achternaam" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="label_Copy2" Content="E-mail" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="tbInsertMedWachtwoord" Content="Wachtwoord" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblWW" Content="Wachtwoord" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="tbInsertMedAdres" HorizontalAlignment="Left" Height="23" Margin="114,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
                 <TextBox x:Name="tbInsertMedStad" HorizontalAlignment="Left" Height="23" Margin="114,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
                 <Label x:Name="label1" Content="Woonplaats" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="lblAdres" Content="Adres" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblAdres" Content="Adres" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="btnMedToevoegen" Content="Toevoegen" HorizontalAlignment="Left" Margin="149,221,0,0" VerticalAlignment="Top" Width="75" Click="btnMedToevoegen_Click"/>
+                <Button x:Name="btnMedToevoegenReset" Content="Reset" HorizontalAlignment="Left" Margin="232,221,0,0" VerticalAlignment="Top" Width="75" Click="btnMedToevoegenReset_Click"/>
             </Grid>
         </GroupBox>
     </Grid>

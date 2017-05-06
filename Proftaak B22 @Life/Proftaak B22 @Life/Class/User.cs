@@ -27,6 +27,16 @@ namespace Proftaak_B22__Life.Class
             this.City = city;
         }
 
+        public User(Account account, string firstname, string insertion, string lastname, string address, string city)
+        {
+            this.Account = account;
+            this.FirstName = firstname;
+            this.Insertion = insertion;
+            this.LastName = lastname;
+            this.Address = address;
+            this.City = city;
+        }
+
         public override string ToString()
         {
             return this.ID.ToString() + " " + this.Insertion + " " + this.LastName + ", " + this.FirstName;

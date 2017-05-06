@@ -21,6 +21,7 @@ namespace Proftaak_B22__Life.Forms
     public partial class MedewerkerForm : Window
     {
         private MedewerkerSQLContext medewerkerContext = new MedewerkerSQLContext();
+        private AccountSQLContext accountContext = new AccountSQLContext();
         private List<Window> actief;
         string selectedwerknemer = "";
         public MedewerkerForm(List<Window> actief)
@@ -95,6 +96,36 @@ namespace Proftaak_B22__Life.Forms
                     lb_Werknemers.Items.Add(m.ToString());
                 }
             }
+        }
+
+        private void btnMedToevoegen_Click(object sender, RoutedEventArgs e)
+        {
+            if (accountContext.Login(tbInsertMedEmail.Text, tbInsertMedWachtwoord.Text) != null)
+            {
+                MessageBox.Show("Er is al een medewerker met deze inloggegevens!");
+            }
+            else
+            {
+                Account account = new Account(tbInsertMedEmail.Text, tbInsertMedWachtwoord.Text);
+                accountContext.InsertAccount(account);
+                medewerkerContext.InsertMedewerker(new Medewerker(account, tbInsertMedNaam.Text, tbInsertMedTussenvoegsel.Text, tbInsertMedAchternaam.Text, tbInsertMedAdres.Text, tbInsertMedStad.Text));
+                MessageBox.Show("Medewerker is toegevoegd!");
+                foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
+                {
+                    lb_Werknemers.Items.Add(m.ToString());
+                }
+            }
+        }
+
+        private void btnMedToevoegenReset_Click(object sender, RoutedEventArgs e)
+        {
+            tbInsertMedAchternaam.Clear();
+            tbInsertMedAdres.Clear();
+            tbInsertMedEmail.Clear();
+            tbInsertMedNaam.Clear();
+            tbInsertMedWachtwoord.Clear();
+            tbInsertMedTussenvoegsel.Clear();
+            tbInsertMedStad.Clear();
         }
     }
 }

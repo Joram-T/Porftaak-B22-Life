@@ -72,6 +72,28 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
         }
 
+        public void InsertAccount(Account account)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "INSERT INTO Account VALUES(@email, @wachtwoord)";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@email", account.Email);
+                    command.Parameters.AddWithValue("@wachtwoord", account.Wachtwoord);
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw e;
+                    }
+                }
+            }
+        }
+
 
         public Account CreateAccountFromReader(SqlDataReader reader)
         {
