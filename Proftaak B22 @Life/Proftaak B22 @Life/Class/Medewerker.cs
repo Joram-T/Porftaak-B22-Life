@@ -10,7 +10,7 @@ namespace Proftaak_B22__Life
     class Medewerker: User
     {
         //AutoProperty generates private field for us
-        public Medewerker(int id, Account account, string name, string address, string city): base(id, account, name, address, city)
+        public Medewerker(int id, Account account, string firstname, string insertion, string lastname, string address, string city): base(id, account, firstname, insertion, lastname, address, city)
         {
         }
     }

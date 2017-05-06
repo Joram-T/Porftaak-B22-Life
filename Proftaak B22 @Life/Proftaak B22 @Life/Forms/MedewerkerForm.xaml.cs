@@ -52,7 +52,7 @@ namespace Proftaak_B22__Life.Forms
             {
                 selectedwerknemer = lb_Werknemers.SelectedItem.ToString();
                 int id = Convert.ToInt32(selectedwerknemer.Split(' ')[0]);
-                lblNaamWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Name;
+                lblNaamWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Insertion + " " + medewerkerContext.GetMedewerkerByID(id).LastName + ", " + medewerkerContext.GetMedewerkerByID(id).FirstName;
                 lblAdreswerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Address;
                 lblStadWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).City;
             }

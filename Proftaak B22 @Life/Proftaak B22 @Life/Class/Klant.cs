@@ -12,7 +12,7 @@ namespace Proftaak_B22__Life
         //AutoProperty generates private field for us
         public string Zip { get; set; }
 
-        public Klant(int id, Account account, string name, string address, string city, string zip): base(id, account, name, address, city)
+        public Klant(int id, Account account, string firstname, string insertion, string lastname, string address, string city, string zip): base(id, account, firstname, insertion, lastname, address, city)
         {
             this.Zip = zip;
         }

@@ -51,13 +51,42 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
         }
 
+        public void InsertMedewerker(Medewerker medewerker)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "INSERT INTO Medewerker VALUES(@managerid, @accountid, @voornaam, @achternaam, @tussenvoegsel, @adres, @woonplaats)";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@managerid", null);
+                    command.Parameters.AddWithValue("@accountid", null);
+                    command.Parameters.AddWithValue("@voornaam", medewerker.FirstName);
+                    command.Parameters.AddWithValue("@achternaam", medewerker.LastName);
+                    command.Parameters.AddWithValue("@tussenvoegsel", medewerker.Insertion);
+                    command.Parameters.AddWithValue("@adres", medewerker.Address);
+                    command.Parameters.AddWithValue("@woonplaats", medewerker.City);
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw e;
+                    }
+                }
+            }
+        }
+
 
         private Medewerker CreateMedewerkerFromReader(SqlDataReader reader)
         {
             AccountSQLContext accountContext = new AccountSQLContext();
             Medewerker medewerker = new Proftaak_B22__Life.Medewerker(Convert.ToInt32(reader["medewerker_id"]),
                                         accountContext.GetAccountByID(Convert.ToInt32(reader["account_id"])),
-                                                                      Convert.ToString(reader["tussenvoegsel"]) + " " + Convert.ToString(reader["achternaam"]) + ", " + Convert.ToString(reader["voornaam"]),
+                                                                      Convert.ToString(reader["voornaam"]),
+                                                                      Convert.ToString(reader["tussenvoegsel"]),
+                                                                      Convert.ToString(reader["achternaam"]),
                                                                       Convert.ToString(reader["adres"]),
                                                                       Convert.ToString(reader["woonplaats"]));
             return medewerker;
