@@ -1,4 +1,5 @@
-﻿using Proftaak_B22__Life.DatabaseContext;
+﻿using Proftaak_B22__Life.Class;
+using Proftaak_B22__Life.DatabaseContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace Proftaak_B22__Life.Forms
     {
         private MedewerkerSQLContext medewerkerContext = new MedewerkerSQLContext();
         private AccountSQLContext accountContext = new AccountSQLContext();
+        private OrderSQLContext orderContext = new OrderSQLContext();
         private List<Window> actief;
         string selectedwerknemer = "";
         public MedewerkerForm(List<Window> actief)
@@ -53,9 +55,20 @@ namespace Proftaak_B22__Life.Forms
             {
                 selectedwerknemer = lb_Werknemers.SelectedItem.ToString();
                 int id = Convert.ToInt32(selectedwerknemer.Split(' ')[0]);
-                lblNaamWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Insertion + " " + medewerkerContext.GetMedewerkerByID(id).LastName + ", " + medewerkerContext.GetMedewerkerByID(id).FirstName;
-                lblAdreswerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Address;
-                lblStadWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).City;
+                Medewerker selectedmedewerker = medewerkerContext.GetMedewerkerByID(id);
+                lblNaamWerknemer.Content = selectedmedewerker.Insertion + " " + selectedmedewerker.LastName + ", " + selectedmedewerker.FirstName;
+
+                gbBestellingen.Header = "Bestellingen van " + selectedmedewerker.FirstName;
+                List<Order> orders = new List<Order>();
+                orders = orderContext.GetAllOrdersForMedewerker(selectedmedewerker);
+                lb_Bestellingen.Items.Clear();
+                foreach (Order o in orders)
+                {
+                    lb_Bestellingen.Items.Add(o.ToString());
+                }
+
+                lblAdreswerknemer.Content = selectedmedewerker.Address;
+                lblStadWerknemer.Content = selectedmedewerker.City;
             }
         }
 
@@ -106,13 +119,23 @@ namespace Proftaak_B22__Life.Forms
             }
             else
             {
-                Account account = new Account(tbInsertMedEmail.Text, tbInsertMedWachtwoord.Text);
-                accountContext.InsertAccount(account);
-                medewerkerContext.InsertMedewerker(new Medewerker(account, tbInsertMedNaam.Text, tbInsertMedTussenvoegsel.Text, tbInsertMedAchternaam.Text, tbInsertMedAdres.Text, tbInsertMedStad.Text));
-                MessageBox.Show("Medewerker is toegevoegd!");
-                foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
+                try
                 {
-                    lb_Werknemers.Items.Add(m.ToString());
+                    Account account = new Account(tbInsertMedEmail.Text, tbInsertMedWachtwoord.Text);
+                    accountContext.InsertAccount(account);
+                    Medewerker medewerker = new Medewerker(account, tbInsertMedNaam.Text, tbInsertMedTussenvoegsel.Text, tbInsertMedAchternaam.Text, tbInsertMedAdres.Text, tbInsertMedStad.Text);
+                    medewerkerContext.InsertMedewerker(medewerker);
+                    MessageBox.Show("Medewerker is toegevoegd!");
+                    lb_Werknemers.Items.Clear();
+                    foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
+                    {
+                        lb_Werknemers.Items.Add(m.ToString());
+
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Er is al een medewerker met deze inloggegevens!");
                 }
             }
         }

@@ -36,5 +36,8 @@
                 <Button x:Name="btnMedToevoegenReset" Content="Reset" HorizontalAlignment="Left" Margin="232,221,0,0" VerticalAlignment="Top" Width="75" Click="btnMedToevoegenReset_Click"/>
             </Grid>
         </GroupBox>
+        <GroupBox x:Name="gbBestellingen" Header="Bestellingen" HorizontalAlignment="Left" Margin="345,446,0,0" VerticalAlignment="Top" Height="272" Width="167">
+            <ListBox x:Name="lb_Bestellingen" HorizontalAlignment="Left" Height="252" Margin="0,0,-2.6,-2.4" VerticalAlignment="Top" Width="157"/>
+        </GroupBox>
     </Grid>
 </Window>

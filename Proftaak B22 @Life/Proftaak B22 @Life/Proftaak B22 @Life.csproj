@@ -72,12 +72,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Class\Order.cs" />
     <Compile Include="DatabaseContext\Database.cs" />
     <Compile Include="Class\Klant.cs" />
     <Compile Include="Class\Product.cs" />
     <Compile Include="Class\User.cs" />
     <Compile Include="DatabaseContext\AccountSQLContext.cs" />
+    <Compile Include="DatabaseContext\KlantSQLContext.cs" />
     <Compile Include="DatabaseContext\MedewerkerSQLContext.cs" />
+    <Compile Include="DatabaseContext\OrderSQLContext.cs" />
+    <Compile Include="DatabaseContext\ProductSQLContext.cs" />
     <Compile Include="Forms\BestellingForm.xaml.cs">
       <DependentUpon>BestellingForm.xaml</DependentUpon>
     </Compile>
