@@ -17,5 +17,10 @@ namespace Proftaak_B22__Life
             this.Zip = zip;
         }
 
+        public override string ToString()
+        {
+            return this.LastName + " " + this.Insertion + ", " + this.FirstName;
+        }
+
     }
 }
