@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Forms\LeverancierForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Forms\BestellingForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -72,14 +76,21 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Class\Artikel.cs" />
     <Compile Include="Class\Bestelling.cs" />
+    <Compile Include="Class\Leverancier.cs" />
     <Compile Include="DatabaseContext\BestellingSQLContext.cs" />
     <Compile Include="DatabaseContext\Database.cs" />
     <Compile Include="Class\Klant.cs" />
     <Compile Include="Class\Product.cs" />
     <Compile Include="Class\User.cs" />
     <Compile Include="DatabaseContext\AccountSQLContext.cs" />
+    <Compile Include="DatabaseContext\LeverancierSQLContext.cs" />
     <Compile Include="DatabaseContext\MedewerkerSQLContext.cs" />
+    <Compile Include="DatabaseContext\ProductSQLContext.cs" />
+    <Compile Include="Forms\LeverancierForm.xaml.cs">
+      <DependentUpon>LeverancierForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\BestellingForm.xaml.cs">
       <DependentUpon>BestellingForm.xaml</DependentUpon>
     </Compile>
@@ -98,6 +109,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\ProductForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\RoosterForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,6 +125,9 @@
     </Compile>
     <Compile Include="Forms\MenuForm.xaml.cs">
       <DependentUpon>MenuForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProductForm.xaml.cs">
+      <DependentUpon>ProductForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\RoosterForm.xaml.cs">
       <DependentUpon>RoosterForm.xaml</DependentUpon>
