@@ -86,5 +86,15 @@ namespace Proftaak_B22__Life.Forms
                 mf.Show();
             }
         }
+
+        private void btnBestellingen_Click(object sender, RoutedEventArgs e)
+        {
+            BestellingForm bf = new BestellingForm(actief);
+            if (CheckActive(bf))
+            {
+                actief.Add(bf);
+                bf.Show();
+            }
+        }
     }
 }
