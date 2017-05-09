@@ -9,12 +9,24 @@ namespace Proftaak_B22__Life
 {
     class Klant : User
     {
+        private string text;
+
         //AutoProperty generates private field for us
         public string Zip { get; set; }
 
-        public Klant(int id, Account account, string firstname, string insertion, string lastname, string address, string city, string zip): base(id, account, firstname, insertion, lastname, address, city)
+        public Klant(int id, string firstname, string insertion, string lastname, string address, string city, string zip): base(id, firstname, insertion, lastname, address, city)
         {
             this.Zip = zip;
+        }
+
+        public Klant(string firstname, string insertion, string lastname, string address, string city, string postcode) : base(firstname, insertion, lastname, address, city)
+        {
+            this.Zip = postcode;
+        }
+
+        public override string ToString()
+        {
+            return this.ID + " " + this.LastName + " " + this.Insertion + ", " + this.FirstName;
         }
 
     }

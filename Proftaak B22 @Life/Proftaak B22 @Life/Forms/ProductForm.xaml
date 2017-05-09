@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <Label x:Name="lblLeverancier" Content="" HorizontalAlignment="Left" Margin="352.6,22,0,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="30" Grid.Column="1"/>
         <TextBox x:Name="tb_Search" HorizontalAlignment="Left" Height="34" Margin="4.6,10,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="271" FontSize="22" FontStyle="Italic" TextDecorations="{x:Null}" Opacity="0.5" BorderBrush="#FF0D0D0E" Background="{x:Null}" SelectionBrush="#FFA4A7AB" GotFocus="tb_Search_GotFocus" TextChanged="tb_Search_TextChanged" Grid.Column="1"/>
-        <ListBox x:Name="lb_Artikelen" Height="554" Margin="4.6,44,0,0" VerticalAlignment="Top" Width="271" HorizontalAlignment="Left" Foreground="Black" SelectionChanged="lb_Werknemers_SelectionChanged" Grid.Column="1">
+        <ListBox x:Name="lb_Artikelen" Height="554" Margin="4.6,44,0,0" VerticalAlignment="Top" Width="271" HorizontalAlignment="Left" Foreground="Black" SelectionChanged="lb_Artikelen_SelectionChanged" Grid.Column="1">
             <ListBox.Effect>
                 <DropShadowEffect/>
             </ListBox.Effect>

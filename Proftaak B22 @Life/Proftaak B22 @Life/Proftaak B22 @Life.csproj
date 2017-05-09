@@ -67,6 +67,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\KlantForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -85,6 +89,7 @@
     <Compile Include="Class\Product.cs" />
     <Compile Include="Class\User.cs" />
     <Compile Include="DatabaseContext\AccountSQLContext.cs" />
+    <Compile Include="DatabaseContext\KlantSQLContext.cs" />
     <Compile Include="DatabaseContext\LeverancierSQLContext.cs" />
     <Compile Include="DatabaseContext\MedewerkerSQLContext.cs" />
     <Compile Include="DatabaseContext\ProductSQLContext.cs" />
@@ -96,6 +101,9 @@
     </Compile>
     <Compile Include="Forms\HoofdScherm.xaml.cs">
       <DependentUpon>HoofdScherm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\KlantForm.xaml.cs">
+      <DependentUpon>KlantForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

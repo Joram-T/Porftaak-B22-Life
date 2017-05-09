@@ -97,6 +97,16 @@ namespace Proftaak_B22__Life.Forms
             }
         }
 
+        private void btnKlanten_Click(object sender, RoutedEventArgs e)
+        {
+            KlantForm kf = new KlantForm(actief);
+            if (CheckActive(kf))
+            {
+                actief.Add(kf);
+                kf.Show();
+            }
+        }
+
         private void btnLeveranciers_Click(object sender, RoutedEventArgs e)
         {
             LeverancierForm lf = new LeverancierForm(actief);
