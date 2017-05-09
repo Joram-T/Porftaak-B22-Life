@@ -17,7 +17,7 @@
         <Label x:Name="lblStadWerknemer" Content="" HorizontalAlignment="Left" Margin="331,377,0,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="30"/>
         <TextBox x:Name="tb_Search" HorizontalAlignment="Left" Height="34" Margin="10,10,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="271" FontSize="22" FontStyle="Italic" TextDecorations="{x:Null}" Opacity="0.5" BorderBrush="#FF0D0D0E" Background="{x:Null}" SelectionBrush="#FFA4A7AB" GotFocus="tb_Search_GotFocus" TextChanged="tb_Search_TextChanged"/>
         <GroupBox x:Name="gbMedewerkerToevoegen" Header="Medewerker toevoegen" HorizontalAlignment="Left" Margin="10,446,0,0" VerticalAlignment="Top" Height="272" Width="330">
-            <Grid x:Name="grid1" HorizontalAlignment="Left" Height="259" Margin="-6,3,0,-12.4" VerticalAlignment="Top" Width="317">
+            <Grid HorizontalAlignment="Left" Height="259" Margin="-6,3,0,-12.4" VerticalAlignment="Top" Width="317">
                 <TextBox x:Name="tbInsertMedNaam" HorizontalAlignment="Left" Height="26" Margin="114,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
                 <TextBox x:Name="tbInsertMedTussenvoegsel" HorizontalAlignment="Left" Margin="114,41,0,0" TextWrapping="Wrap" Width="59" Height="26" VerticalAlignment="Top"/>
                 <TextBox x:Name="tbInsertMedAchternaam" HorizontalAlignment="Left" Margin="114,72,0,161" TextWrapping="Wrap" Width="193"/>
@@ -34,20 +34,6 @@
                 <Label x:Name="lblAdres" Content="Adres" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top"/>
                 <Button x:Name="btnMedToevoegen" Content="Toevoegen" HorizontalAlignment="Left" Margin="149,221,0,0" VerticalAlignment="Top" Width="75" Click="btnMedToevoegen_Click"/>
                 <Button x:Name="btnMedToevoegenReset" Content="Reset" HorizontalAlignment="Left" Margin="232,221,0,0" VerticalAlignment="Top" Width="75" Click="btnMedToevoegenReset_Click"/>
-            </Grid>
-        </GroupBox>
-        <GroupBox x:Name="gbBestellingen" Header="Bestellingen" HorizontalAlignment="Left" Margin="345,446,0,0" VerticalAlignment="Top" Height="272" Width="657">
-            <Grid x:Name="grid2" HorizontalAlignment="Left" Height="272" VerticalAlignment="Top" Width="657" Margin="0,0,-13,-22.4">
-                <ListBox x:Name="lb_Bestellingen" HorizontalAlignment="Left" Height="244" VerticalAlignment="Top" Width="157" SelectionChanged="lb_Bestellingen_SelectionChanged"/>
-                <ListView x:Name="lb_BestellingArtikelen" HorizontalAlignment="Left" Height="244" Margin="162,0,0,0" VerticalAlignment="Top" Width="465">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Artikelnummer" DisplayMemberBinding="{Binding [0]}"/>
-                            <GridViewColumn Header="Artikelnaam" DisplayMemberBinding="{Binding [1]}"/>
-                            <GridViewColumn Header="Artikelprijs" DisplayMemberBinding="{Binding [2]}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
             </Grid>
         </GroupBox>
     </Grid>

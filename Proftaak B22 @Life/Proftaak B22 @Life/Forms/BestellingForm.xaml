@@ -21,7 +21,6 @@
         <TextBox x:Name="tbBestel" HorizontalAlignment="Left" Height="23" Margin="688,154,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="tbLever" HorizontalAlignment="Left" Height="23" Margin="688,204,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="tbBetaal" HorizontalAlignment="Left" Height="23" Margin="688,254,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnWijzig" Content="Wijzig Bestelling" HorizontalAlignment="Left" Margin="545,358,0,0" VerticalAlignment="Top" Width="92" Click="btnWijzig_Click"/>
         <Button x:Name="btnSluit" Content="Sluit bestelling" HorizontalAlignment="Left" Margin="716,358,0,0" VerticalAlignment="Top" Width="92"/>
 
     </Grid>

@@ -12,19 +12,6 @@ namespace Proftaak_B22__Life.Class
         public int ID { get; }
         public string Name { get; set; }
         public string Description { get; set; }       
-        public double Price { get; set; }
-
-        public Product(int id, string name, string description, double price)
-        {
-            this.ID = id;
-            this.Name = name;
-            this.Description = description;
-            this.Price = price;
-        }
-
-        public override string ToString()
-        {
-            return ID.ToString() + " - " + Name + " - €" + Price.ToString();
-        }
+        public decimal Price { get; set; }
     }
 }
