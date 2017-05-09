@@ -45,7 +45,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     {
                         while (reader.Read())
                         {
-                            artikelen.Add(productContext.CreateProductFromReader(reader));
+                            artikelen.Add(productContext.GetArtikelByID(Convert.ToInt32(reader["artikel_id"])));
                         }
                     }
                 }

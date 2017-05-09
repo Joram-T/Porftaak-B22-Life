@@ -21,5 +21,10 @@ namespace Proftaak_B22__Life.Class
             this.Description = description;
             this.Price = price;
         }
+
+        public override string ToString()
+        {
+            return ID.ToString() + " - " + Name + " - €" + Price.ToString();
+        }
     }
 }

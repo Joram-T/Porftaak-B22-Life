@@ -26,6 +26,7 @@ namespace Proftaak_B22__Life.Forms
         private OrderSQLContext orderContext = new OrderSQLContext();
         private List<Window> actief;
         string selectedwerknemer = "";
+        string selectedbestelling = "";
         public MedewerkerForm(List<Window> actief)
         {
             InitializeComponent();
@@ -149,6 +150,21 @@ namespace Proftaak_B22__Life.Forms
             tbInsertMedWachtwoord.Clear();
             tbInsertMedTussenvoegsel.Clear();
             tbInsertMedStad.Clear();
+        }
+ 
+        private void lb_Bestellingen_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lb_Bestellingen.SelectedIndex != -1)
+            {
+                selectedbestelling = lb_Bestellingen.SelectedItem.ToString();
+                int id = Convert.ToInt32(string.Join("", selectedbestelling.Split('-')[0].ToCharArray().Where(Char.IsDigit)));
+                lb_BestellingArtikelen.Items.Clear();
+
+                foreach (Product p in orderContext.GetArtikelenForOrder(orderContext.GetOrderByID(id)))
+                {
+                    lb_BestellingArtikelen.Items.Add(new string[] { p.ID.ToString(), p.Name, "€"+p.Price.ToString() });
+                }
+            }
         }
     }
 }
