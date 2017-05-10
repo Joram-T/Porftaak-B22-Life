@@ -22,6 +22,8 @@
         <DatePicker Name="dpBestel" HorizontalAlignment="Left" Margin="688,151,0,0" VerticalAlignment="Top" Width="120"/>
         <DatePicker Name="dpLever" HorizontalAlignment="Left" Margin="688,201,0,0" VerticalAlignment="Top" Width="120"/>
         <DatePicker Name="dpBetaal" HorizontalAlignment="Left" Margin="688,250,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnEdit" Content="Edit bestelling" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="530,358,0,0" Click="btnEdit_Click"/>
+        <Button x:Name="btnSave" Content="Bestelling Opslaaan" HorizontalAlignment="Left" IsEnabled="False" VerticalAlignment="Top" Width="117" Margin="613,414,0,0"/>
 
     </Grid>
 </Window>

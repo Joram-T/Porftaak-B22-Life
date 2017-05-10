@@ -125,19 +125,42 @@ namespace Proftaak_B22__Life.DatabaseContext
             return bestelling;
         }
 
-        public void UpdateBestelling(Klant klant)
+        public void SluitBestelling(int id, DateTime leverdatum, DateTime betaaldatum)
         {
             using (SqlConnection connection = Database.Connection)
             {
-                string query = "Update INTO \"Order\" VALUES(@voornaam, @achternaam, @tussenvoegsel, @adres, @woonplaats, @postcode)";
+                string query = "Update \"Order\" SET leverdatum = @leverdatum, betaaldatum = @betaaldatum where order_id=@id";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@voornaam", klant.FirstName);
-                    command.Parameters.AddWithValue("@achternaam", klant.LastName);
-                    command.Parameters.AddWithValue("@tussenvoegsel", klant.Insertion);
-                    command.Parameters.AddWithValue("@adres", klant.Address);
-                    command.Parameters.AddWithValue("@woonplaats", klant.City);
-                    command.Parameters.AddWithValue("@postcode", klant.Zip);
+                    command.Parameters.AddWithValue("@id", id);
+                    command.Parameters.AddWithValue("@leverdatum", leverdatum);
+                    command.Parameters.AddWithValue("@betaaldatum", betaaldatum);
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw e;
+                    }
+                }
+            }
+        }
+
+        public void UpdateBestelling(int id, DateTime besteldatum, DateTime leverdatum, DateTime betaaldatum)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "Update \"Order\" SET besteldatum = @besteldatum, leverdatum = @leverdatum, betaaldatum = @betaaldatum where order_id=@id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", id);
+                    command.Parameters.AddWithValue("@klant_id", id);
+                    command.Parameters.AddWithValue("@medewerker_id", id);
+                    command.Parameters.AddWithValue("@besteldatum", besteldatum);
+                    command.Parameters.AddWithValue("@leverdatum", leverdatum);
+                    command.Parameters.AddWithValue("@betaaldatum", betaaldatum);
                     try
                     {
                         command.ExecuteNonQuery();
