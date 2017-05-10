@@ -27,6 +27,7 @@ namespace Proftaak_B22__Life.Forms
         public LeverancierForm(List<Window> actief)
         {
             InitializeComponent();
+            List<Leverancier> testlist = new List<Leverancier>();
             foreach (Leverancier l in leverancierContext.GetAllLeveranciers())
             {
                 lb_Leveranciers.Items.Add(l.ToString());
@@ -104,6 +105,7 @@ namespace Proftaak_B22__Life.Forms
             {
                 leverancierContext.InsertLeverancier(new Leverancier(tbInsertLevNaam.Text, tbInsertLevAdres.Text, tbInsertLevStad.Text));
                 MessageBox.Show("Leverancier is toegevoegd!");
+                lb_Leveranciers.Items.Clear();
                 foreach (Leverancier l in leverancierContext.GetAllLeveranciers())
                 {
                     lb_Leveranciers.Items.Add(l.ToString());
@@ -111,7 +113,9 @@ namespace Proftaak_B22__Life.Forms
             }
 
             catch
-            { }
+            {
+                throw;
+            }
         }
 
         private void btnLevToevoegenReset_Click(object sender, RoutedEventArgs e)

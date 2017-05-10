@@ -15,17 +15,17 @@ namespace Proftaak_B22__Life
 
         public Leverancier(int id, string name, string address, string city)
         {
-            id = this.ID;
-            name = this.Name;
-            address = this.Address;
-            city = this.City;
+            this.ID = id;
+            this.Name = name;
+            this.Address = address;
+            this.City = city;
         }
 
         public Leverancier(string name, string address, string city)
         {
-            name = this.Name;
-            address = this.Address;
-            city = this.City;
+            this.Name = name;
+            this.Address = address;
+            this.City = city;
         }
 
         public override string ToString()
