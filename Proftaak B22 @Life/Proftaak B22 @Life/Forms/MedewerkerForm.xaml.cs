@@ -67,7 +67,7 @@ namespace Proftaak_B22__Life.Forms
                 lbBestellingen.Items.Clear();
                 foreach (Bestelling b in bestellingen)
                 {
-                    lbBestellingen.Items.Add(b.Id + " - ");
+                    lbBestellingen.Items.Add(b.ToString());
                 }
             }
         }
@@ -146,7 +146,7 @@ namespace Proftaak_B22__Life.Forms
             if (lbBestellingen.SelectedIndex != -1)
             { 
                 string selectedbestelling = lbBestellingen.SelectedItem.ToString();
-                int id = Convert.ToInt32(string.Join("", selectedbestelling.Split('-')[0].ToCharArray().Where(Char.IsDigit)));
+                int id = Convert.ToInt32(string.Join("", selectedbestelling.Split(',')[0].ToCharArray().Where(Char.IsDigit)));
                 lv_BestellingArtikelen.Items.Clear();
 
                 foreach (Artikel a in bestellingContext.GetArtikelenForBestelling(bestellingContext.GetBestellingByID(id)))
