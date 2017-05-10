@@ -36,5 +36,19 @@
                 <Button x:Name="btnMedToevoegenReset" Content="Reset" HorizontalAlignment="Left" Margin="232,221,0,0" VerticalAlignment="Top" Width="75" Click="btnMedToevoegenReset_Click"/>
             </Grid>
         </GroupBox>
+        <GroupBox x:Name="gbBestellingen" Header="Bestellingen" HorizontalAlignment="Left" Margin="345,446,0,0" VerticalAlignment="Top" Height="272" Width="647">
+            <Grid HorizontalAlignment="Left" Height="262" Margin="0,0,-2.6,-12.4" VerticalAlignment="Top" Width="637">
+                <ListBox x:Name="lbBestellingen" HorizontalAlignment="Left" Height="242" Margin="10,10,0,0" VerticalAlignment="Top" Width="151" SelectionChanged="lbBestellingen_SelectionChanged"/>
+                <ListView x:Name="lv_BestellingArtikelen" HorizontalAlignment="Left" Height="242" Margin="166,10,0,0" VerticalAlignment="Top" Width="461">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Artikelnummer"/>
+                            <GridViewColumn Header="Artikelnaam"/>
+                            <GridViewColumn Header="Artikelprijs"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

@@ -1,0 +1,40 @@
+﻿<Window x:Class="Proftaak_B22__Life.Forms.ProductForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Proftaak_B22__Life.Forms"
+        mc:Ignorable="d"
+        Title="ProductForm" Height="789.6" Width="996">
+    <Grid RenderTransformOrigin="0.427,0.413" Margin="0,0,-0.4,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="951*"/>
+            <ColumnDefinition Width="20*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="lblLeverancier" Content="" HorizontalAlignment="Left" Margin="352.6,22,0,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="30" Grid.Column="1"/>
+        <TextBox x:Name="tb_Search" HorizontalAlignment="Left" Height="34" Margin="4.6,10,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="271" FontSize="22" FontStyle="Italic" TextDecorations="{x:Null}" Opacity="0.5" BorderBrush="#FF0D0D0E" Background="{x:Null}" SelectionBrush="#FFA4A7AB" GotFocus="tb_Search_GotFocus" TextChanged="tb_Search_TextChanged" Grid.Column="1"/>
+        <ListBox x:Name="lb_Artikelen" Height="554" Margin="4.6,44,0,0" VerticalAlignment="Top" Width="271" HorizontalAlignment="Left" Foreground="Black" SelectionChanged="lb_Artikelen_SelectionChanged" Grid.Column="1">
+            <ListBox.Effect>
+                <DropShadowEffect/>
+            </ListBox.Effect>
+        </ListBox>
+        <GroupBox x:Name="gbArtToevoegen" Header="Artikel toevoegen" HorizontalAlignment="Left" Margin="370.6,246,0,0" VerticalAlignment="Top" Height="193" Width="330" Grid.Column="1">
+            <Grid HorizontalAlignment="Left" Margin="-6,3,-12.4,14" Width="336">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="109*"/>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="224*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="tbInsertProNaam" HorizontalAlignment="Left" Height="26" Margin="1,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193" Grid.Column="3"/>
+                <Label x:Name="label" Content="Product" HorizontalAlignment="Left" Margin="6.8,10,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="74"/>
+                <TextBox x:Name="tbInsertLevNaam" HorizontalAlignment="Left" Height="23" Margin="1,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193" Grid.Column="3"/>
+                <Label x:Name="lblAdres" Content="Leverancier" HorizontalAlignment="Left" Margin="6.8,42,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="74"/>
+                <Button x:Name="btnArtToevoegen" Content="Toevoegen" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top" Width="75" Click="btnArtToevoegen_Click" Grid.Column="3" Height="19"/>
+                <Button x:Name="btnArtReset" Content="Reset" HorizontalAlignment="Left" Margin="119,119,0,0" VerticalAlignment="Top" Width="75" Click="btnArtReset_Click" Grid.Column="3" Height="19"/>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>

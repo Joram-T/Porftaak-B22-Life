@@ -106,5 +106,15 @@ namespace Proftaak_B22__Life.Forms
                 kf.Show();
             }
         }
+
+        private void btnLeveranciers_Click(object sender, RoutedEventArgs e)
+        {
+            LeverancierForm lf = new LeverancierForm(actief);
+            if (CheckActive(lf))
+            {
+                actief.Add(lf);
+                lf.Show();
+            }
+        }
     }
 }
