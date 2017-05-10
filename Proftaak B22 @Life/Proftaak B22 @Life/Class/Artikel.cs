@@ -14,15 +14,15 @@ namespace Proftaak_B22__Life
 
         public Artikel(int artikelid, int productid, int leverancierid)
         {
-            artikelid = this.Artikelid;
-            productid = this.Productid;
-            leverancierid = this.Leverancierid;
+            this.Artikelid = artikelid;
+            this.Productid = productid;
+            this.Leverancierid = leverancierid;
         }
 
         public Artikel(int productid, int leverancierid)
         {
-            productid = this.Productid;
-            leverancierid = this.Leverancierid;
+            this.Productid = productid;
+            this.Leverancierid = leverancierid;
         }
 
         public override string ToString()

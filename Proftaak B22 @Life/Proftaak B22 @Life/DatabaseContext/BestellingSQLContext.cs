@@ -69,7 +69,29 @@ namespace Proftaak_B22__Life.DatabaseContext
                 }
             }
         }
-        
+
+        public List<Product> GetArtikelenForBestelling(Bestelling bestelling)
+        {
+            ProductSQLContext productContext = new ProductSQLContext();
+            List<Product> artikelen = new List<Product>();
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "SELECT * FROM [Orderregel] JOIN Artikel on [Orderregel].artikel_id = Artikel.artikel_id JOIN Product on artikel.product_id = product.product_id where order_id = @order_id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@order_id", bestelling.Id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                        }
+                    }
+                }
+            }
+            return artikelen;
+        }
+
 
         private Bestelling CreateBestellingFromReader(SqlDataReader reader)
         {
