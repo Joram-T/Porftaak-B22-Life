@@ -35,6 +35,21 @@
         <Label x:Name="lblAdresKlant" Content="" HorizontalAlignment="Left" Margin="339,133,0,0" VerticalAlignment="Top" Height="38" Width="369" FontSize="20"/>
         <Label x:Name="lblWoonplaatsKlant" Content="" HorizontalAlignment="Left" Margin="339,176,0,0" VerticalAlignment="Top" Height="38" Width="369" FontSize="20"/>
         <Label x:Name="lblPostcodeKlant" Content="" HorizontalAlignment="Left" Margin="339,219,0,0" VerticalAlignment="Top" Height="38" Width="369" FontSize="20"/>
+        <GroupBox x:Name="gbOpenBestellingenKlant" Header="Open bestellingen" HorizontalAlignment="Left" Margin="339,304,0,0" VerticalAlignment="Top" Height="155" Width="172">
+            <ListBox x:Name="lbOpenBestellingenKlant" HorizontalAlignment="Left" Height="135" Margin="0,0,0,-2.2" VerticalAlignment="Top" Width="158" SelectionChanged="lbOpenBestellingenKlant_SelectionChanged"/>
+        </GroupBox>
+        <GroupBox x:Name="gbGeslotenBestellingenKlant" Header="Gesloten bestellingen" HorizontalAlignment="Left" Margin="511,304,0,0" VerticalAlignment="Top" Height="155" Width="172">
+            <ListBox x:Name="lbGeslotenBestellingenKlant" HorizontalAlignment="Left" Margin="0,0,0,-2.2" Width="158" SelectionChanged="lbGeslotenBestellingenKlant_SelectionChanged"/>
+        </GroupBox>
+        <ListView x:Name="lvBestellingArtikelen" HorizontalAlignment="Left" Height="264" Margin="339,464,0,0" VerticalAlignment="Top" Width="344">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Artikelnummer" DisplayMemberBinding="{Binding [0]}"/>
+                    <GridViewColumn Header="Artikelnaam" DisplayMemberBinding="{Binding [1]}"/>
+                    <GridViewColumn Header="Artikelprijs" DisplayMemberBinding="{Binding [2]}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using Proftaak_B22__Life.DatabaseContext;
+﻿using Proftaak_B22__Life.Class;
+using Proftaak_B22__Life.DatabaseContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace Proftaak_B22__Life.Forms
     public partial class KlantForm : Window
     {
         KlantSQLContext klantContext = new KlantSQLContext();
+        BestellingSQLContext bestellingContext = new BestellingSQLContext();
+        ProductSQLContext productContext = new ProductSQLContext();
         string selectedklant;
         private List<Window> actief;
         public KlantForm(List<Window> actief)
@@ -103,6 +106,56 @@ namespace Proftaak_B22__Life.Forms
                 lblAdresKlant.Content = klantContext.GetKlantByID(id).Address;
                 lblWoonplaatsKlant.Content = klantContext.GetKlantByID(id).City;
                 lblPostcodeKlant.Content = klantContext.GetKlantByID(id).Zip;
+
+
+                Klant currentKlant = klantContext.GetKlantByID(id);
+                List<Bestelling> openbestellingen = new List<Bestelling>();
+                List<Bestelling> geslotenbestellingen = new List<Bestelling>();
+                openbestellingen = klantContext.GetOpenBestellingenForKlant(currentKlant);
+                geslotenbestellingen = klantContext.GetGeslotenBestellingenForKlant(currentKlant);
+                lbOpenBestellingenKlant.Items.Clear();
+                lbGeslotenBestellingenKlant.Items.Clear();
+                foreach (Bestelling b in openbestellingen)
+                {
+                    lbOpenBestellingenKlant.Items.Add(b.ToString());
+                }
+                foreach (Bestelling b2 in geslotenbestellingen)
+                {
+                    lbGeslotenBestellingenKlant.Items.Add(b2.ToString());
+                }
+            }
+        }
+
+        private void lbOpenBestellingenKlant_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lbOpenBestellingenKlant.SelectedIndex != -1)
+            {
+                string selectedbestelling = lbOpenBestellingenKlant.SelectedItem.ToString();
+                int id = Convert.ToInt32(string.Join("", selectedbestelling.Split(',')[0].ToCharArray().Where(Char.IsDigit)));
+                lvBestellingArtikelen.Items.Clear();
+
+                foreach (Artikel a in bestellingContext.GetArtikelenForBestelling(bestellingContext.GetBestellingByID(id)))
+                {
+                    Product artikelproduct = productContext.GetProductByID(a.Productid);
+                    lvBestellingArtikelen.Items.Add(new string[] { a.Artikelid.ToString(), artikelproduct.Name, "€" + artikelproduct.Price.ToString() });
+                }
+            }
+        }
+
+        private void lbGeslotenBestellingenKlant_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lvBestellingArtikelen.Items.Clear();
+            if (lbGeslotenBestellingenKlant.SelectedIndex != -1)
+            {
+                string selectedbestelling = lbGeslotenBestellingenKlant.SelectedItem.ToString();
+                int id = Convert.ToInt32(string.Join("", selectedbestelling.Split(',')[0].ToCharArray().Where(Char.IsDigit)));
+                lvBestellingArtikelen.Items.Clear();
+
+                foreach (Artikel a in bestellingContext.GetArtikelenForBestelling(bestellingContext.GetBestellingByID(id)))
+                {
+                    Product artikelproduct = productContext.GetProductByID(a.Productid);
+                    lvBestellingArtikelen.Items.Add(new string[] { a.Artikelid.ToString(), artikelproduct.Name, "€" + artikelproduct.Price.ToString() });
+                }
             }
         }
     }

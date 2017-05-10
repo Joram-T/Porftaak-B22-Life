@@ -77,6 +77,50 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
         }
 
+        public List<Bestelling> GetOpenBestellingenForKlant(Klant klant)
+        {
+            BestellingSQLContext bestellingContext = new BestellingSQLContext();
+            List<Bestelling> result = new List<Bestelling>();
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "SELECT * FROM \"Order\" where klant_id = @klant_id AND betaaldatum is null order by besteldatum";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@klant_id", klant.ID);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(bestellingContext.CreateBestellingFromReader(reader));
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+
+        public List<Bestelling> GetGeslotenBestellingenForKlant(Klant klant)
+        {
+            BestellingSQLContext bestellingContext = new BestellingSQLContext();
+            List<Bestelling> result = new List<Bestelling>();
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "SELECT * FROM \"Order\" where klant_id = @klant_id AND betaaldatum is not null order by besteldatum";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@klant_id", klant.ID);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(bestellingContext.CreateBestellingFromReader(reader));
+                        }
+                    }
+                }
+            }
+            return result;
+        }
 
 
         private Klant CreateKlantFromReader(SqlDataReader reader)
