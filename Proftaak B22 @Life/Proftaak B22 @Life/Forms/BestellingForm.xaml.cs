@@ -29,14 +29,7 @@ namespace Proftaak_B22__Life.Forms
         public BestellingForm(List<Window> actief)
         {
             InitializeComponent();
-            foreach(Bestelling b in bestellingcontext.GetOpenBestellingen())
-            {
-                lbOpen.Items.Add(b);
-            }
-            foreach (Bestelling b in bestellingcontext.GetGeslotenBestellingen())
-            {
-                lbGesloten.Items.Add(b);
-            }
+            FillLb();
             this.actief = actief;
         }
 
@@ -50,14 +43,16 @@ namespace Proftaak_B22__Life.Forms
                 selectedid = id;
                 tbMedewerker.Text = medewerkercontext.GetMedewerkerByID(bestellingcontext.GetBestellingByID(id).Medewerker).LastName;
                 tbMedewerker.IsEnabled = false;
-                tbBestel.Text = bestellingcontext.GetBestellingByID(id).Besteldatum.ToString("dd/MM/yyyy");
-                tbBestel.IsEnabled = false;
+                dpBestel.SelectedDate = bestellingcontext.GetBestellingByID(id).Besteldatum;
+                dpBestel.IsEnabled = false;
                 tbKlant.IsEnabled = false;
-                tbLever.Text = bestellingcontext.GetBestellingByID(id).Leverdatum.ToString("dd/MM/yyyy");
-                tbLever.IsEnabled = false;
-                tbBetaal.Text = bestellingcontext.GetBestellingByID(id).Betaaldatum.ToString("dd/MM/yyyy");
-                tbBetaal.IsEnabled = false;                       
-              }
+                dpLever.SelectedDate = bestellingcontext.GetBestellingByID(id).Leverdatum;
+                dpLever.IsEnabled = false;
+                dpBetaal.SelectedDate = bestellingcontext.GetBestellingByID(id).Betaaldatum;
+                dpBetaal.IsEnabled = false;
+                btnSave.IsEnabled = false;
+                btnEdit.IsEnabled = true;
+            }
            }
 
         private void lbOpen_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -70,10 +65,80 @@ namespace Proftaak_B22__Life.Forms
                 selectedid = id;
                 tbMedewerker.Text = medewerkercontext.GetMedewerkerByID(bestellingcontext.GetBestellingByID(id).Medewerker).LastName;
                 tbMedewerker.IsEnabled = false;
-                tbBestel.Text = bestellingcontext.GetBestellingByID(id).Besteldatum.ToString("dd/MM/yyyy");
-                tbBestel.IsEnabled = false;
+                dpBestel.SelectedDate = bestellingcontext.GetBestellingByID(id).Besteldatum;
+                dpBestel.IsEnabled = false;
                 tbKlant.IsEnabled = false;
+                dpLever.Text = "";
+                dpLever.IsEnabled = true;
+                dpBetaal.Text = "";
+                dpBetaal.IsEnabled = true;
+                btnSave.IsEnabled = false;
+                btnEdit.IsEnabled = true;
+                btnSluit.IsEnabled = true;
             }
+        }
+
+        private void btnSluit_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(Bestelling b in bestellingcontext.GetOpenBestellingen())
+            {
+                if (b.Id == selectedid && dpLever.Text!="" && dpBetaal.Text!="")
+                {
+                    bestellingcontext.SluitBestelling(b.Id, Convert.ToDateTime(dpLever.Text), Convert.ToDateTime(dpBetaal.Text));
+                }
+            }
+            FillLb();
+        }
+
+        private void FillLb()
+        {
+            lbOpen.Items.Clear();
+            lbGesloten.Items.Clear();
+            foreach (Bestelling b in bestellingcontext.GetOpenBestellingen())
+            {
+                lbOpen.Items.Add(b);
+            }
+            foreach (Bestelling b in bestellingcontext.GetGeslotenBestellingen())
+            {
+                lbGesloten.Items.Add(b);
+            }
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            Window wi = new Window();
+            foreach (Window w in actief)
+            {
+                if (w.GetType() == this.GetType())
+                {
+                    wi = w;
+                }
+            }
+            actief.Remove(wi);
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            tbMedewerker.IsEnabled = true;
+            dpBestel.IsEnabled = true;
+            tbKlant.IsEnabled = true;
+            dpLever.IsEnabled = true;
+            dpBetaal.IsEnabled = true;
+            btnSave.IsEnabled = true;
+            btnEdit.IsEnabled = false;
+            btnSluit.IsEnabled = false;  
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            bestellingcontext.UpdateBestelling(selectedid, Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpBetaal.Text), Convert.ToDateTime(dpLever.Text));
+            tbMedewerker.IsEnabled = false;
+            dpBestel.IsEnabled = false;
+            tbKlant.IsEnabled = false;
+            dpLever.IsEnabled = false;
+            dpBetaal.IsEnabled = false;
+            btnSave.IsEnabled = false;
+            btnEdit.IsEnabled = true;
         }
     }
     }

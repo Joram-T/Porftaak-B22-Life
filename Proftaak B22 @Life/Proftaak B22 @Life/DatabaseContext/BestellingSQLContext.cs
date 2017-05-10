@@ -124,5 +124,54 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
             return bestelling;
         }
+
+        public void SluitBestelling(int id, DateTime leverdatum, DateTime betaaldatum)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "Update \"Order\" SET leverdatum = @leverdatum, betaaldatum = @betaaldatum where order_id=@id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", id);
+                    command.Parameters.AddWithValue("@leverdatum", leverdatum);
+                    command.Parameters.AddWithValue("@betaaldatum", betaaldatum);
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw e;
+                    }
+                }
+            }
+        }
+
+        public void UpdateBestelling(int id, DateTime besteldatum, DateTime leverdatum, DateTime betaaldatum)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "Update \"Order\" SET besteldatum = @besteldatum, leverdatum = @leverdatum, betaaldatum = @betaaldatum where order_id=@id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", id);
+                    command.Parameters.AddWithValue("@klant_id", id);
+                    command.Parameters.AddWithValue("@medewerker_id", id);
+                    command.Parameters.AddWithValue("@besteldatum", besteldatum);
+                    command.Parameters.AddWithValue("@leverdatum", leverdatum);
+                    command.Parameters.AddWithValue("@betaaldatum", betaaldatum);
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw e;
+                    }
+                }
+            }
+        }
     }
 }
