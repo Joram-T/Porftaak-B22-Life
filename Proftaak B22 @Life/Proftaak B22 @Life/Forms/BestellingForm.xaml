@@ -18,10 +18,10 @@
         <Label x:Name="lblbetaal" Content="Betaaldatum:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="530,250,0,0"/>
         <TextBox x:Name="tbMedewerker" HorizontalAlignment="Left" Height="23" Margin="688,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="tbKlant" HorizontalAlignment="Left" Height="23" Margin="688,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbBestel" HorizontalAlignment="Left" Height="23" Margin="688,154,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbLever" HorizontalAlignment="Left" Height="23" Margin="688,204,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbBetaal" HorizontalAlignment="Left" Height="23" Margin="688,254,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnSluit" Content="Sluit bestelling" HorizontalAlignment="Left" Margin="716,358,0,0" VerticalAlignment="Top" Width="92"/>
+        <Button x:Name="btnSluit" Content="Sluit bestelling" HorizontalAlignment="Left" Margin="716,358,0,0" VerticalAlignment="Top" Width="92" Click="btnSluit_Click"/>
+        <DatePicker Name="dpBestel" HorizontalAlignment="Left" Margin="688,151,0,0" VerticalAlignment="Top" Width="120"/>
+        <DatePicker Name="dpLever" HorizontalAlignment="Left" Margin="688,201,0,0" VerticalAlignment="Top" Width="120"/>
+        <DatePicker Name="dpBetaal" HorizontalAlignment="Left" Margin="688,250,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

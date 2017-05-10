@@ -50,13 +50,13 @@ namespace Proftaak_B22__Life.Forms
                 selectedid = id;
                 tbMedewerker.Text = medewerkercontext.GetMedewerkerByID(bestellingcontext.GetBestellingByID(id).Medewerker).LastName;
                 tbMedewerker.IsEnabled = false;
-                tbBestel.Text = bestellingcontext.GetBestellingByID(id).Besteldatum.ToString("dd/MM/yyyy");
-                tbBestel.IsEnabled = false;
+                dpBestel.SelectedDate = bestellingcontext.GetBestellingByID(id).Besteldatum;
+                dpBestel.IsEnabled = false;
                 tbKlant.IsEnabled = false;
-                tbLever.Text = bestellingcontext.GetBestellingByID(id).Leverdatum.ToString("dd/MM/yyyy");
-                tbLever.IsEnabled = false;
-                tbBetaal.Text = bestellingcontext.GetBestellingByID(id).Betaaldatum.ToString("dd/MM/yyyy");
-                tbBetaal.IsEnabled = false;                       
+                dpLever.SelectedDate = bestellingcontext.GetBestellingByID(id).Leverdatum;
+                dpLever.IsEnabled = false;
+                dpBetaal.SelectedDate = bestellingcontext.GetBestellingByID(id).Betaaldatum;
+                dpBetaal.IsEnabled = false;                       
               }
            }
 
@@ -70,9 +70,25 @@ namespace Proftaak_B22__Life.Forms
                 selectedid = id;
                 tbMedewerker.Text = medewerkercontext.GetMedewerkerByID(bestellingcontext.GetBestellingByID(id).Medewerker).LastName;
                 tbMedewerker.IsEnabled = false;
-                tbBestel.Text = bestellingcontext.GetBestellingByID(id).Besteldatum.ToString("dd/MM/yyyy");
-                tbBestel.IsEnabled = false;
+                dpBestel.SelectedDate = bestellingcontext.GetBestellingByID(id).Besteldatum;
+                dpBestel.IsEnabled = false;
                 tbKlant.IsEnabled = false;
+                dpLever.Text = "";
+                dpLever.IsEnabled = true;
+                dpBetaal.Text = "";
+                dpBetaal.IsEnabled = true;
+            }
+        }
+
+        private void btnSluit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(dpBetaal.Text);
+            foreach(Bestelling b in bestellingcontext.GetOpenBestellingen())
+            {
+                if (b.Id == selectedid && dpLever.Text!="" && dpBetaal.Text!="")
+                {
+
+                }
             }
         }
     }

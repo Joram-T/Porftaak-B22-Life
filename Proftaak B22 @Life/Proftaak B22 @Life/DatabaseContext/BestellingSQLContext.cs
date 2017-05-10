@@ -102,5 +102,31 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
             return bestelling;
         }
+
+        public void UpdateBestelling(Klant klant)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "Update INTO \"Order\" VALUES(@voornaam, @achternaam, @tussenvoegsel, @adres, @woonplaats, @postcode)";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@voornaam", klant.FirstName);
+                    command.Parameters.AddWithValue("@achternaam", klant.LastName);
+                    command.Parameters.AddWithValue("@tussenvoegsel", klant.Insertion);
+                    command.Parameters.AddWithValue("@adres", klant.Address);
+                    command.Parameters.AddWithValue("@woonplaats", klant.City);
+                    command.Parameters.AddWithValue("@postcode", klant.Zip);
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw e;
+                    }
+                }
+            }
+        }
     }
 }
