@@ -70,10 +70,10 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
         }
 
-        public List<Product> GetArtikelenForBestelling(Bestelling bestelling)
+        public List<Artikel> GetArtikelenForBestelling(Bestelling bestelling)
         {
             ProductSQLContext productContext = new ProductSQLContext();
-            List<Product> artikelen = new List<Product>();
+            List<Artikel> artikelen = new List<Artikel>();
             using (SqlConnection connection = Database.Connection)
             {
                 string query = "SELECT * FROM [Orderregel] JOIN Artikel on [Orderregel].artikel_id = Artikel.artikel_id JOIN Product on artikel.product_id = product.product_id where order_id = @order_id";
@@ -84,7 +84,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     {
                         while (reader.Read())
                         {
-
+                            artikelen.Add(productContext.CreateArtikelFromReader(reader));
                         }
                     }
                 }
@@ -93,7 +93,7 @@ namespace Proftaak_B22__Life.DatabaseContext
         }
 
 
-        private Bestelling CreateBestellingFromReader(SqlDataReader reader)
+        public Bestelling CreateBestellingFromReader(SqlDataReader reader)
         {
             Bestelling bestelling = new Bestelling(1, 1, 1, DateTime.Now);
 

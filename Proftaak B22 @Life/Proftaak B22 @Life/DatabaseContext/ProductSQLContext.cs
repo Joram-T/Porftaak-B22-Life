@@ -75,7 +75,7 @@ namespace Proftaak_B22__Life.DatabaseContext
         }
 
 
-        private Artikel CreateArtikelFromReader(SqlDataReader reader)
+        public Artikel CreateArtikelFromReader(SqlDataReader reader)
         {
             Artikel Artikel = new Proftaak_B22__Life.Artikel(Convert.ToInt32(reader["artikel_id"]),
                                                                       Convert.ToInt32(reader["product_id"]),

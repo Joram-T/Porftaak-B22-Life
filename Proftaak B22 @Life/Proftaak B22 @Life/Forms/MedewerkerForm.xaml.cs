@@ -1,4 +1,5 @@
-﻿using Proftaak_B22__Life.DatabaseContext;
+﻿using Proftaak_B22__Life.Class;
+using Proftaak_B22__Life.DatabaseContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,8 @@ namespace Proftaak_B22__Life.Forms
     {
         private MedewerkerSQLContext medewerkerContext = new MedewerkerSQLContext();
         private AccountSQLContext accountContext = new AccountSQLContext();
+        private BestellingSQLContext bestellingContext = new BestellingSQLContext();
+        ProductSQLContext productContext = new ProductSQLContext();
         private List<Window> actief;
         string selectedwerknemer = "";
         public MedewerkerForm(List<Window> actief)
@@ -56,6 +59,16 @@ namespace Proftaak_B22__Life.Forms
                 lblNaamWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Insertion + " " + medewerkerContext.GetMedewerkerByID(id).LastName + ", " + medewerkerContext.GetMedewerkerByID(id).FirstName;
                 lblAdreswerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Address;
                 lblStadWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).City;
+
+                Medewerker currentMedewerker = medewerkerContext.GetMedewerkerByID(id);
+                gbBestellingen.Header = "Bestellingen van " + currentMedewerker.FirstName;
+                List<Bestelling> bestellingen = new List<Bestelling>();
+                bestellingen = medewerkerContext.GetOpenBestellingenForMedewerker(currentMedewerker);
+                lbBestellingen.Items.Clear();
+                foreach (Bestelling b in bestellingen)
+                {
+                    lbBestellingen.Items.Add(b.Id + " - ");
+                }
             }
         }
 
@@ -126,6 +139,21 @@ namespace Proftaak_B22__Life.Forms
             tbInsertMedWachtwoord.Clear();
             tbInsertMedTussenvoegsel.Clear();
             tbInsertMedStad.Clear();
+        }
+
+        private void lbBestellingen_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lbBestellingen.SelectedIndex != -1)
+            { 
+                string selectedbestelling = lbBestellingen.SelectedItem.ToString();
+                int id = Convert.ToInt32(string.Join("", selectedbestelling.Split('-')[0].ToCharArray().Where(Char.IsDigit)));
+                lv_BestellingArtikelen.Items.Clear();
+
+                foreach (Artikel a in bestellingContext.GetArtikelenForBestelling(bestellingContext.GetBestellingByID(id)))
+                {
+                    lv_BestellingArtikelen.Items.Add(new string[] { a.Artikelid.ToString(), a.Artikelid.ToString(), a.Artikelid.ToString() });
+                }
+            }
         }
     }
 }
