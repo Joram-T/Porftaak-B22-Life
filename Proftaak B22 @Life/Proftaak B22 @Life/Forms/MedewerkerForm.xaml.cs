@@ -151,7 +151,8 @@ namespace Proftaak_B22__Life.Forms
 
                 foreach (Artikel a in bestellingContext.GetArtikelenForBestelling(bestellingContext.GetBestellingByID(id)))
                 {
-                    lv_BestellingArtikelen.Items.Add(new string[] { a.Artikelid.ToString(), a.Artikelid.ToString(), a.Artikelid.ToString() });
+                    Product artikelproduct = productContext.GetProductByID(a.Productid);
+                    lv_BestellingArtikelen.Items.Add(new string[] { a.Artikelid.ToString(), artikelproduct.Name, "€"+artikelproduct.Price.ToString() });
                 }
             }
         }

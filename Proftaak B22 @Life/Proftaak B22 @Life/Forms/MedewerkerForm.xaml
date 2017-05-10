@@ -42,9 +42,9 @@
                 <ListView x:Name="lv_BestellingArtikelen" HorizontalAlignment="Left" Height="242" Margin="166,10,0,0" VerticalAlignment="Top" Width="461">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Artikelnummer"/>
-                            <GridViewColumn Header="Artikelnaam"/>
-                            <GridViewColumn Header="Artikelprijs"/>
+                            <GridViewColumn Header="Artikelnummer" DisplayMemberBinding="{Binding [0]}"/>
+                            <GridViewColumn Header="Artikelnaam" DisplayMemberBinding="{Binding [1]}"/>
+                            <GridViewColumn Header="Artikelprijs" DisplayMemberBinding="{Binding [2]}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

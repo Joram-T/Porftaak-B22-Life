@@ -51,6 +51,35 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
         }
 
+        public Product GetProductByID(int id)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "SELECT * FROM Product WHERE product_id = @product_id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@product_id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            return CreateProductFromReader(reader);
+                        }
+                        return null;
+                    }
+                }
+            }
+        }
+
+        private Product CreateProductFromReader(SqlDataReader reader)
+        {
+            Product product = new Product(Convert.ToInt32(reader["product_id"]),
+                                          Convert.ToString(reader["naam"]),
+                                          Convert.ToString(reader["omschrijving"]),
+                                          Convert.ToDecimal(reader["prijs"]));
+            return product;
+        }
+
         public void InsertArtikel(Artikel Artikel)
         {
             using (SqlConnection connection = Database.Connection)

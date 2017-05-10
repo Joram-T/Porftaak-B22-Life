@@ -17,17 +17,17 @@ namespace Proftaak_B22__Life.Class
 
         public Product(int id, string name, string description, decimal price)
         {
-            id = this.ID;
-            name = this.Name;
-            description = this.Description;
-            price = this.Price;
+            this.ID = id;
+            this.Name = name;
+            this.Description = description;
+            this.Price = price;
         }
 
         public Product(string name, string description, decimal price)
         {
-            name = this.Name;
-            description = this.Description;
-            price = this.Price;
+            this.Name = name;
+            this.Description = description;
+            this.Price = price;
         }
 
         public override string ToString()
