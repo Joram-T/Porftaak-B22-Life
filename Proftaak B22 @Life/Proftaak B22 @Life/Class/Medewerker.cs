@@ -9,6 +9,7 @@ namespace Proftaak_B22__Life
 {
     class Medewerker: User
     {
+        byte[] Profielfoto { get; set; }
         Account Account { get; set; }
         //AutoProperty generates private field for us
         public Medewerker(int id, Account account, string firstname, string insertion, string lastname, string address, string city): base(id, firstname, insertion, lastname, address, city)

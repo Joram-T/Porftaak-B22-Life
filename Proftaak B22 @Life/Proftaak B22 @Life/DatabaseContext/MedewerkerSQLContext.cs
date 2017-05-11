@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Proftaak_B22__Life.DatabaseContext
 {
@@ -122,6 +124,53 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
         }
 
+        public BitmapImage GetProfielfotoForMedewerker(Medewerker medewerker)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "SELECT profielfoto FROM [Medewerker] WHERE medewerker_id = @medewerker_id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@medewerker_id", medewerker.ID);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                return CreateProfielfotoFromReader(reader);
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public void UpdateProfielfoto(Medewerker medewerker, byte[] profielfoto)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "UPDATE [Medewerker] SET profielfoto = @profielfoto WHERE medewerker_id = @medewerker_id";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@medewerker_id", medewerker.ID);
+                    command.Parameters.AddWithValue("@profielfoto", profielfoto);
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
+                }
+
+            }
+        }
+
 
         private Medewerker CreateMedewerkerFromReader(SqlDataReader reader)
         {
@@ -135,6 +184,30 @@ namespace Proftaak_B22__Life.DatabaseContext
                                                                       Convert.ToString(reader["woonplaats"]));
             return medewerker;
 
+        }
+
+        private BitmapImage CreateProfielfotoFromReader(SqlDataReader reader)
+        {
+            BitmapImage image = new BitmapImage();
+            byte[] profielfoto = new byte[0];
+            int colIndex = reader.GetOrdinal("profielfoto");
+            if (!reader.IsDBNull(colIndex))
+            {
+                profielfoto = (byte[])(reader["profielfoto"]);
+                using (MemoryStream stream = new MemoryStream(profielfoto))
+                {
+                    stream.Position = 0;
+                    image.BeginInit();
+                    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.UriSource = null;
+                    image.StreamSource = stream;
+                    image.EndInit();
+                    image.Freeze();
+                    return image;
+                }
+            }
+            return null;
         }
     }
 }

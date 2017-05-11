@@ -1,7 +1,9 @@
-﻿using Proftaak_B22__Life.Class;
+﻿using Microsoft.Win32;
+using Proftaak_B22__Life.Class;
 using Proftaak_B22__Life.DatabaseContext;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +29,7 @@ namespace Proftaak_B22__Life.Forms
         ProductSQLContext productContext = new ProductSQLContext();
         private List<Window> actief;
         string selectedwerknemer = "";
+        Medewerker currentMedewerker;
         public MedewerkerForm(List<Window> actief)
         {
             InitializeComponent();
@@ -53,14 +56,14 @@ namespace Proftaak_B22__Life.Forms
         private void lb_Werknemers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lb_Werknemers.SelectedIndex != -1)
-            {
+            {              
                 selectedwerknemer = lb_Werknemers.SelectedItem.ToString();
                 int id = Convert.ToInt32(selectedwerknemer.Split(' ')[0]);
                 lblNaamWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Insertion + " " + medewerkerContext.GetMedewerkerByID(id).LastName + ", " + medewerkerContext.GetMedewerkerByID(id).FirstName;
                 lblAdreswerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Address;
                 lblStadWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).City;
 
-                Medewerker currentMedewerker = medewerkerContext.GetMedewerkerByID(id);
+                this.currentMedewerker = medewerkerContext.GetMedewerkerByID(id);
                 gbBestellingen.Header = "Bestellingen van " + currentMedewerker.FirstName;
                 List<Bestelling> bestellingen = new List<Bestelling>();
                 bestellingen = medewerkerContext.GetBestellingenForMedewerker(currentMedewerker);
@@ -68,6 +71,12 @@ namespace Proftaak_B22__Life.Forms
                 foreach (Bestelling b in bestellingen)
                 {
                     lbBestellingen.Items.Add(b.ToString());
+                }
+
+                img_Profielfoto.Source = null;
+                if (medewerkerContext.GetProfielfotoForMedewerker(this.currentMedewerker) != null)
+                {
+                    img_Profielfoto.Source = medewerkerContext.GetProfielfotoForMedewerker(currentMedewerker);
                 }
             }
         }
@@ -162,6 +171,26 @@ namespace Proftaak_B22__Life.Forms
                     }
                     Product artikelproduct = productContext.GetProductByID(a.Productid);
                     lv_BestellingArtikelen.Items.Add(new string[] { a.Artikelid.ToString(), artikelproduct.Name, "€"+artikelproduct.Price.ToString(), status });
+                }
+            }
+        }
+
+        private void btnVeranderProfielfoto_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
+
+            if (open.ShowDialog() == true)
+            {
+                byte[] profielfoto = File.ReadAllBytes(open.FileName);
+                try
+                {
+                    medewerkerContext.UpdateProfielfoto(this.currentMedewerker, profielfoto);
+                    img_Profielfoto.Source = medewerkerContext.GetProfielfotoForMedewerker(this.currentMedewerker);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
                 }
             }
         }
