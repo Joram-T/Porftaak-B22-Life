@@ -36,6 +36,19 @@ namespace Proftaak_B22__Life.Forms
             }
         }
 
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            Window wi = new Window();
+            foreach (Window w in actief)
+            {
+                if (w.GetType() == this.GetType())
+                {
+                    wi = w;
+                }
+            }
+            actief.Remove(wi);
+        }
+
         private void tb_SearchKlant_GotFocus(object sender, RoutedEventArgs e)
         {
             lb_Klanten.SelectedIndex = -1;

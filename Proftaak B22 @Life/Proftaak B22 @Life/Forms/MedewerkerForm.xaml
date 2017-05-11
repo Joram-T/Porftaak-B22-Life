@@ -45,6 +45,7 @@
                             <GridViewColumn Header="Artikelnummer" DisplayMemberBinding="{Binding [0]}"/>
                             <GridViewColumn Header="Artikelnaam" DisplayMemberBinding="{Binding [1]}"/>
                             <GridViewColumn Header="Artikelprijs" DisplayMemberBinding="{Binding [2]}"/>
+                            <GridViewColumn Header="Status" DisplayMemberBinding="{Binding [3]}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

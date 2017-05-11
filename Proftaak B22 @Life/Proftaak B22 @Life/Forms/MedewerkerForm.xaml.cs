@@ -63,7 +63,7 @@ namespace Proftaak_B22__Life.Forms
                 Medewerker currentMedewerker = medewerkerContext.GetMedewerkerByID(id);
                 gbBestellingen.Header = "Bestellingen van " + currentMedewerker.FirstName;
                 List<Bestelling> bestellingen = new List<Bestelling>();
-                bestellingen = medewerkerContext.GetOpenBestellingenForMedewerker(currentMedewerker);
+                bestellingen = medewerkerContext.GetBestellingenForMedewerker(currentMedewerker);
                 lbBestellingen.Items.Clear();
                 foreach (Bestelling b in bestellingen)
                 {
@@ -148,11 +148,20 @@ namespace Proftaak_B22__Life.Forms
                 string selectedbestelling = lbBestellingen.SelectedItem.ToString();
                 int id = Convert.ToInt32(string.Join("", selectedbestelling.Split(',')[0].ToCharArray().Where(Char.IsDigit)));
                 lv_BestellingArtikelen.Items.Clear();
-
-                foreach (Artikel a in bestellingContext.GetArtikelenForBestelling(bestellingContext.GetBestellingByID(id)))
+                Bestelling currentBestelling = bestellingContext.GetBestellingByID(id);
+                string status = "";
+                foreach (Artikel a in bestellingContext.GetArtikelenForBestelling(currentBestelling))
                 {
+                    if (currentBestelling.Betaaldatum != Convert.ToDateTime("1-1-0001 00:00:00"))
+                    {
+                        status = "Betaald";
+                    }
+                    else
+                    {
+                        status = "In behandeling";
+                    }
                     Product artikelproduct = productContext.GetProductByID(a.Productid);
-                    lv_BestellingArtikelen.Items.Add(new string[] { a.Artikelid.ToString(), artikelproduct.Name, "€"+artikelproduct.Price.ToString() });
+                    lv_BestellingArtikelen.Items.Add(new string[] { a.Artikelid.ToString(), artikelproduct.Name, "€"+artikelproduct.Price.ToString(), status });
                 }
             }
         }

@@ -50,13 +50,13 @@ namespace Proftaak_B22__Life.DatabaseContext
                 }
             }
         }
-        public List<Bestelling> GetOpenBestellingenForMedewerker(Medewerker medewerker)
+        public List<Bestelling> GetBestellingenForMedewerker(Medewerker medewerker)
         {
             BestellingSQLContext bestellingContext = new BestellingSQLContext();
             List<Bestelling> result = new List<Bestelling>();
             using (SqlConnection connection = Database.Connection)
             {
-                string query = "SELECT * FROM \"Order\" where betaaldatum is null AND medewerker_id = @medewerker_id order by besteldatum";
+                string query = "SELECT * FROM \"Order\" where medewerker_id = @medewerker_id order by besteldatum";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@medewerker_id", medewerker.ID);
