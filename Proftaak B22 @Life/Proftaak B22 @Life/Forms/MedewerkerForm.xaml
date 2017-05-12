@@ -13,8 +13,8 @@
             </ListBox.Effect>
         </ListBox>
         <Label x:Name="lblNaamWerknemer" Content="" HorizontalAlignment="Center" Margin="331,10,237,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="40" FontWeight="Bold"/>
-        <Label x:Name="lblAdreswerknemer" Content="" HorizontalAlignment="Left" Margin="331,308,0,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="30"/>
-        <Label x:Name="lblStadWerknemer" Content="" HorizontalAlignment="Left" Margin="331,377,0,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="30"/>
+        <Label x:Name="lblAdreswerknemer" Content="" HorizontalAlignment="Left" Margin="331,308,0,0" VerticalAlignment="Top" Height="64" Width="354" FontSize="30"/>
+        <Label x:Name="lblStadWerknemer" Content="" HorizontalAlignment="Left" Margin="331,377,0,0" VerticalAlignment="Top" Height="64" Width="354" FontSize="30"/>
         <TextBox x:Name="tb_Search" HorizontalAlignment="Left" Height="34" Margin="10,10,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="271" FontSize="22" FontStyle="Italic" TextDecorations="{x:Null}" Opacity="0.5" BorderBrush="#FF0D0D0E" Background="{x:Null}" SelectionBrush="#FFA4A7AB" GotFocus="tb_Search_GotFocus" TextChanged="tb_Search_TextChanged"/>
         <GroupBox x:Name="gbMedewerkerToevoegen" Header="Medewerker toevoegen" HorizontalAlignment="Left" Margin="10,446,0,0" VerticalAlignment="Top" Height="272" Width="330">
             <Grid HorizontalAlignment="Left" Height="259" Margin="-6,3,0,-12.4" VerticalAlignment="Top" Width="317">

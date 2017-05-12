@@ -33,6 +33,7 @@ namespace Proftaak_B22__Life.Forms
         public MedewerkerForm(List<Window> actief)
         {
             InitializeComponent();
+            btnVeranderProfielfoto.Visibility = Visibility.Hidden;
             foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
             {
                 lb_Werknemers.Items.Add(m.ToString());
@@ -56,7 +57,8 @@ namespace Proftaak_B22__Life.Forms
         private void lb_Werknemers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lb_Werknemers.SelectedIndex != -1)
-            {              
+            {
+                btnVeranderProfielfoto.Visibility = Visibility.Visible;     
                 selectedwerknemer = lb_Werknemers.SelectedItem.ToString();
                 int id = Convert.ToInt32(selectedwerknemer.Split(' ')[0]);
                 lblNaamWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Insertion + " " + medewerkerContext.GetMedewerkerByID(id).LastName + ", " + medewerkerContext.GetMedewerkerByID(id).FirstName;
