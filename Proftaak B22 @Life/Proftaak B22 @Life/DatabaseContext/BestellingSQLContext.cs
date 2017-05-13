@@ -173,5 +173,51 @@ namespace Proftaak_B22__Life.DatabaseContext
                 }
             }
         }
+
+        public int GetMaxID()
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "SELECT MAX(order_id) FROM \"Order\"";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            return Convert.ToInt32(reader["order_id"]);
+                        }
+                        return 0;
+                    }
+                }
+            }
+
+        }
+
+        public void InsertBestelling(int klant_id, int medewerker_id, DateTime besteldatum, DateTime leverdatum, DateTime betaaldatum)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "Insert INTO \"Order\" VALUES(@id, @klant_id, @medewerker_id, @besteldatum, @leverdatum, @betaaldatum)";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", GetMaxID()+1);
+                    command.Parameters.AddWithValue("@klant_id", klant_id);
+                    command.Parameters.AddWithValue("@medewerker_id", medewerker_id);
+                    command.Parameters.AddWithValue("@besteldatum", besteldatum);
+                    command.Parameters.AddWithValue("@leverdatum", leverdatum);
+                    command.Parameters.AddWithValue("@betaaldatum", betaaldatum);
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
+                }
+            }
+        }
     }
 }

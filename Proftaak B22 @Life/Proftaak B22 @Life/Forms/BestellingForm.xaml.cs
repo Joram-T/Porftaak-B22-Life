@@ -24,13 +24,14 @@ namespace Proftaak_B22__Life.Forms
         private BestellingSQLContext bestellingcontext = new BestellingSQLContext();
         private MedewerkerSQLContext medewerkercontext = new MedewerkerSQLContext();
         private List<Window> actief;
-        private int selectedid;
+        private int selectedid =-1;
 
         public BestellingForm(List<Window> actief)
         {
             InitializeComponent();
             FillLb();
             this.actief = actief;
+            btnSave.IsEnabled = false;
         }
 
         private void lbGesloten_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -129,9 +130,16 @@ namespace Proftaak_B22__Life.Forms
             btnSluit.IsEnabled = false;  
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private void btnSave_Click_1(object sender, RoutedEventArgs e)
         {
-            bestellingcontext.UpdateBestelling(selectedid, Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpBetaal.Text), Convert.ToDateTime(dpLever.Text));
+            if (selectedid != -1)
+            {
+               bestellingcontext.UpdateBestelling(selectedid, Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpBetaal.Text), Convert.ToDateTime(dpLever.Text));
+            }
+            else
+            {
+                bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpBetaal.Text), Convert.ToDateTime(dpLever.Text));
+            }
             tbMedewerker.IsEnabled = false;
             dpBestel.IsEnabled = false;
             tbKlant.IsEnabled = false;
@@ -139,6 +147,30 @@ namespace Proftaak_B22__Life.Forms
             dpBetaal.IsEnabled = false;
             btnSave.IsEnabled = false;
             btnEdit.IsEnabled = true;
+            lblKlant.Content = "Klant:";
+            lblMedewerker.Content = "Medewerker:";
+        }
+
+        private void btnNew_Click(object sender, RoutedEventArgs e)
+        {
+            lbGesloten.SelectedIndex = -1;
+            lbOpen.SelectedIndex = 1;
+            selectedid = -1;
+            lblKlant.Content = "Klant ID:";
+            lblMedewerker.Content = "Medewerker ID:";
+            tbKlant.Text = "";
+            tbMedewerker.Text = "";
+            dpBestel.ClearValue(DatePicker.SelectedDateProperty);
+            dpLever.ClearValue(DatePicker.SelectedDateProperty);
+            dpBetaal.ClearValue(DatePicker.SelectedDateProperty);
+            tbMedewerker.IsEnabled = true;
+            dpBestel.IsEnabled = true;
+            tbKlant.IsEnabled = true;
+            dpLever.IsEnabled = true;
+            dpBetaal.IsEnabled = true;
+            btnSave.IsEnabled = true;
+            btnEdit.IsEnabled = false;
+            btnSluit.IsEnabled = false;
         }
     }
     }
