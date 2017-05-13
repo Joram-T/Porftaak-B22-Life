@@ -140,6 +140,9 @@ namespace Proftaak_B22__Life.Forms
             {
                 bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpBetaal.Text), Convert.ToDateTime(dpLever.Text));
             }
+            lbGesloten.Items.Clear();
+            lbOpen.Items.Clear();
+            FillLb();
             tbMedewerker.IsEnabled = false;
             dpBestel.IsEnabled = false;
             tbKlant.IsEnabled = false;

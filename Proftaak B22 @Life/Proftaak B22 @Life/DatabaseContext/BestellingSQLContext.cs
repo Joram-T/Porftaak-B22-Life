@@ -185,7 +185,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     {
                         while (reader.Read())
                         {
-                            return Convert.ToInt32(reader["order_id"]);
+                            return Convert.ToInt32(reader[0]);
                         }
                         return 0;
                     }
@@ -198,7 +198,7 @@ namespace Proftaak_B22__Life.DatabaseContext
         {
             using (SqlConnection connection = Database.Connection)
             {
-                string query = "Insert INTO \"Order\" VALUES(@id, @klant_id, @medewerker_id, @besteldatum, @leverdatum, @betaaldatum)";
+                string query = "Insert INTO \"Order\" VALUES(@id, @klant_id, @medewerker_id, @besteldatum, @leverdatum, @betaaldatum, @totaalprijs)";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -208,6 +208,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     command.Parameters.AddWithValue("@besteldatum", besteldatum);
                     command.Parameters.AddWithValue("@leverdatum", leverdatum);
                     command.Parameters.AddWithValue("@betaaldatum", betaaldatum);
+                    command.Parameters.AddWithValue("@totaalprijs", 0);
                     try
                     {
                         command.ExecuteNonQuery();
