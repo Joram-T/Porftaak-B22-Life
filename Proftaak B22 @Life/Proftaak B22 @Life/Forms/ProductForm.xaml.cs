@@ -23,9 +23,7 @@ namespace Proftaak_B22__Life.Forms
         private LeverancierSQLContext leverancierContext = new LeverancierSQLContext();
         private ProductSQLContext productContext = new ProductSQLContext();
         private List<Window> actief;
-        string selectedLeverancier = "";
         string selectedArtikel = "";
-        string selectedProduct = "";
 
         public ProductForm(List<Window> actief)
         {
@@ -55,9 +53,10 @@ namespace Proftaak_B22__Life.Forms
             if (lb_Artikelen.SelectedIndex != -1)
             {
                 selectedArtikel = lb_Artikelen.SelectedItem.ToString();
-                int id = Convert.ToInt32(selectedLeverancier.Split(' ')[2]);
-                lblLeverancier.Content = leverancierContext.GetLeverancierByID(id).Name;
-                
+                string leverancier = selectedArtikel.Split(' ')[2];
+                string product = selectedArtikel.Split(' ')[1];
+                lblLeverancier.Content = leverancier + ", " + product;
+
             }
         }
 
@@ -102,12 +101,27 @@ namespace Proftaak_B22__Life.Forms
 
         private void btnArtToevoegen_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                productContext.InsertArtikel(new Artikel(Convert.ToInt32(tbInsertProNaam.Text), Convert.ToInt32(tbInsertLevNaam.Text)));
+                MessageBox.Show("Artikel is toegevoegd!");
+                lb_Artikelen.Items.Clear();
+                foreach (Artikel a in productContext.GetAllArtikelen())
+                {
+                    lb_Artikelen.Items.Add(a.ToString());
+                }
+            }
 
+            catch
+            {
+                throw;
+            }
         }
 
         private void btnArtReset_Click(object sender, RoutedEventArgs e)
         {
-
+            tbInsertProNaam.Clear();
+            tbInsertLevNaam.Clear();
         }
     }
 }

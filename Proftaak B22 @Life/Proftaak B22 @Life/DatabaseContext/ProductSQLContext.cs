@@ -106,10 +106,17 @@ namespace Proftaak_B22__Life.DatabaseContext
 
         public Artikel CreateArtikelFromReader(SqlDataReader reader)
         {
-            Artikel Artikel = new Proftaak_B22__Life.Artikel(Convert.ToInt32(reader["artikel_id"]),
-                                                                      Convert.ToInt32(reader["product_id"]),
-                                                                      Convert.ToInt32(reader["leverancier_id"]));
-            return Artikel;
+            try
+            {
+                Artikel Artikel = new Proftaak_B22__Life.Artikel(Convert.ToInt32(reader["artikel_id"]),
+                                                          Convert.ToInt32(reader["product_id"]),
+                                                          Convert.ToInt32(reader["leverancier_id"]));
+                return Artikel;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
 
         }
     }
