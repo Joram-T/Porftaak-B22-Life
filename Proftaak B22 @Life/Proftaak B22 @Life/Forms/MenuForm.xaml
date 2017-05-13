@@ -12,7 +12,7 @@
         <Button x:Name="btnBestellingen" Content="Bestellingen" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="10,90,0,0" Height="35" Click="btnBestellingen_Click"/>
         <Button x:Name="btnLeveranciers" Content="Leveranciers" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="138,10,-9,0" Height="35" Click="btnLeveranciers_Click"/>
         <Button x:Name="btnKlanten" Content="Klanten" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="138,50,-9,0" Height="35" Click="btnKlanten_Click"/>
-        <Button x:Name="btnArtikel" Content="Artikel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="138,90,-9,0" Height="35"/>
+        <Button x:Name="btnArtikel" Content="Artikel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="138,90,-9,0" Height="35" Click="btnArtikel_Click"/>
 
     </Grid>
 </Window>

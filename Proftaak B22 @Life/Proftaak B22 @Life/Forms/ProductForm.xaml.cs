@@ -53,9 +53,9 @@ namespace Proftaak_B22__Life.Forms
             if (lb_Artikelen.SelectedIndex != -1)
             {
                 selectedArtikel = lb_Artikelen.SelectedItem.ToString();
-                string leverancier = selectedArtikel.Split(' ')[2];
-                string product = selectedArtikel.Split(' ')[1];
-                lblLeverancier.Content = leverancier + ", " + product;
+                string leverancier = selectedArtikel.Split(' ')[1];
+                string product = selectedArtikel.Split(' ')[2];
+                lblLeverancier.Content = leverancierContext.GetLeverancierByID(Convert.ToInt32(leverancier)) + ", " + productContext.GetProductByID(Convert.ToInt32(product));
 
             }
         }
@@ -75,19 +75,30 @@ namespace Proftaak_B22__Life.Forms
             List<Artikel> zoekopdrachtArtikelen = new List<Artikel>();
             if (tb_Search.Text != "")
             {
-                foreach (Artikel a in productContext.GetAllArtikelen())
+                try
                 {
-                    if (a.ToString().IndexOf(tb_Search.Text, StringComparison.InvariantCultureIgnoreCase) != -1)
+                    foreach (Artikel a in productContext.GetAllArtikelen())
                     {
-                        zoekopdrachtArtikelen.Add(a);
+                        if (a.ToString().IndexOf(tb_Search.Text, StringComparison.InvariantCultureIgnoreCase) != -1)
+                        {
+                            zoekopdrachtArtikelen.Add(a);
+                        }
+                    }
+                    if (lb_Artikelen != null)
+                    {
+                        lb_Artikelen.Items.Clear();
+                        foreach (Artikel a in zoekopdrachtArtikelen)
+                        {
+                            lb_Artikelen.Items.Add(a.ToString());
+                        }
                     }
                 }
-                lb_Artikelen.Items.Clear();
-                foreach (Artikel a in zoekopdrachtArtikelen)
-                {
-                    lb_Artikelen.Items.Add(a.ToString());
-                }
 
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+       
             }
             else
             {

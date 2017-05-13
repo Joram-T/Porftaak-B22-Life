@@ -116,5 +116,15 @@ namespace Proftaak_B22__Life.Forms
                 kf.Show();
             }
         }
+
+        private void btnArtikel_Click(object sender, RoutedEventArgs e)
+        {
+            ProductForm pf = new ProductForm(actief);
+            if (CheckActive(pf))
+            {
+                actief.Add(pf);
+                pf.Show();
+            }
+        }
     }
 }

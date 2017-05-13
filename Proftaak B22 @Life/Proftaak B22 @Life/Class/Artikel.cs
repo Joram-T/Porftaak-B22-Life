@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using Proftaak_B22__Life.Class;
 using Proftaak_B22__Life.DatabaseContext;
 
@@ -30,10 +31,8 @@ namespace Proftaak_B22__Life
 
         public override string ToString()
         {
-            LeverancierSQLContext levContext = new LeverancierSQLContext();
-            ProductSQLContext proContext = new ProductSQLContext();
-            return this.Artikelid.ToString() + " " + proContext.GetProductByID(Productid).Name + " " +
-                   levContext.GetLeverancierByID(Leverancierid).Name;
+            return this.Artikelid.ToString() + " " + Leverancierid.ToString() + " " +
+                   Productid.ToString();
         }
     }
 }
