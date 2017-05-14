@@ -16,9 +16,9 @@
                 <DropShadowEffect/>
             </ListBox.Effect>
         </ListBox>
-        <Label x:Name="lblNaamLeverancier" Content="" HorizontalAlignment="Center" Margin="332.4,49,146,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="40" FontWeight="Bold" Grid.Column="1"/>
-        <Label x:Name="lblAdresLeverancier" Content="" HorizontalAlignment="Left" Margin="241.4,308,0,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="30" Grid.Column="1"/>
-        <Label x:Name="lblStadLeverancier" Content="" HorizontalAlignment="Left" Margin="241.4,377,0,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="30" Grid.Column="1"/>
+        <Label x:Name="lblNaamLeverancier" Content="" HorizontalAlignment="Center" Margin="241.4,102,237,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="40" FontWeight="Bold" Grid.Column="1"/>
+        <Label x:Name="lblAdresLeverancier" Content="" HorizontalAlignment="Left" Margin="241.4,282,0,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="30" FontWeight="Bold" Grid.Column="1"/>
+        <Label x:Name="lblStadLeverancier" Content="" HorizontalAlignment="Left" Margin="241.4,377,0,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="30" FontWeight="Bold" Grid.Column="1"/>
         <TextBox x:Name="tb_Search" HorizontalAlignment="Left" Height="34" Margin="10,10,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="271" FontSize="22" FontStyle="Italic" TextDecorations="{x:Null}" Opacity="0.5" BorderBrush="#FF0D0D0E" Background="{x:Null}" SelectionBrush="#FFA4A7AB" GotFocus="tb_Search_GotFocus" TextChanged="tb_Search_TextChanged" Grid.ColumnSpan="2"/>
         <GroupBox x:Name="gbLeverancierToevoegen" Header="Leverancier toevoegen" HorizontalAlignment="Left" Margin="10,446,0,0" VerticalAlignment="Top" Height="161" Width="330" Grid.ColumnSpan="2">
             <Grid HorizontalAlignment="Left" Height="157" Margin="-6,3,0,0" VerticalAlignment="Top" Width="317">
@@ -32,5 +32,8 @@
                 <Button x:Name="btnLevToevoegenReset" Content="Reset" HorizontalAlignment="Left" Margin="232,99,0,0" VerticalAlignment="Top" Width="75" Click="btnLevToevoegenReset_Click"/>
             </Grid>
         </GroupBox>
+        <Label Content="Leverancier" Grid.Column="1" HorizontalAlignment="Left" Margin="241.4,49,0,0" VerticalAlignment="Top" Width="169" Height="48" FontSize="32"/>
+        <Label Content="Adres" Grid.Column="1" HorizontalAlignment="Left" Margin="241.4,235,0,0" VerticalAlignment="Top" Width="155" Height="47" FontSize="32"/>
+        <Label Content="Plaats" Grid.Column="1" HorizontalAlignment="Left" Margin="241.4,330,0,0" VerticalAlignment="Top" Width="155" Height="47" FontSize="32"/>
     </Grid>
 </Window>
