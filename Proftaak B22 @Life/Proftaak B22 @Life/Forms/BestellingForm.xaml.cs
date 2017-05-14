@@ -32,6 +32,8 @@ namespace Proftaak_B22__Life.Forms
             FillLb();
             this.actief = actief;
             btnSave.IsEnabled = false;
+            btnEdit.IsEnabled = false;
+            btnSluit.IsEnabled = false;
         }
 
         private void lbGesloten_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -53,6 +55,7 @@ namespace Proftaak_B22__Life.Forms
                 dpBetaal.IsEnabled = false;
                 btnSave.IsEnabled = false;
                 btnEdit.IsEnabled = true;
+                btnSluit.IsEnabled = false;
             }
            }
 

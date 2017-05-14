@@ -113,12 +113,16 @@ namespace Proftaak_B22__Life.Forms
                         lb_Leveranciers.Items.Add(l.ToString());
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Gelieve alle velden in te vullen!");
+                }
 
             }
 
-            catch
+            catch (Exception E)
             {
-                throw;
+                Console.WriteLine(E.Message);
             }
         }
 
