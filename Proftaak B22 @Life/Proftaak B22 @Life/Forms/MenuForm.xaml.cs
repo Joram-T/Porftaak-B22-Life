@@ -23,6 +23,7 @@ namespace Proftaak_B22__Life.Forms
         public MenuForm()
         {
             InitializeComponent();
+            
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -41,9 +42,19 @@ namespace Proftaak_B22__Life.Forms
                 case MessageBoxResult.Yes:
                     MainWindow mw = new MainWindow();
                     mw.Show();
-                    foreach(Window w in actief){
-                        w.Close();
+                    try
+                    {
+                        foreach (Window w in actief.ToList())
+                        {
+                            w.Close();
+                        }
                     }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception.Message);
+                        throw;
+                    }
+
                     break;
                 case MessageBoxResult.No:
                     Application.Current.Shutdown();
