@@ -80,15 +80,15 @@ namespace Proftaak_B22__Life.DatabaseContext
             return product;
         }
 
-        public void InsertArtikel(Artikel Artikel)
+        public void InsertArtikel(Artikel artikel)
         {
             using (SqlConnection connection = Database.Connection)
             {
                 string query = "INSERT INTO Artikel VALUES(@product_id, @leverancier_id)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@product_id", Artikel.Productid);
-                    command.Parameters.AddWithValue("@leverancier_id", Artikel.Leverancierid);
+                    command.Parameters.AddWithValue("@product_id", artikel.Productid);
+                    command.Parameters.AddWithValue("@leverancier_id", artikel.Leverancierid);
                     try
                     {
                         command.ExecuteNonQuery();
@@ -107,10 +107,10 @@ namespace Proftaak_B22__Life.DatabaseContext
         {
             try
             {
-                Artikel Artikel = new Proftaak_B22__Life.Artikel(Convert.ToInt32(reader["artikel_id"]),
+                Artikel artikel = new Proftaak_B22__Life.Artikel(Convert.ToInt32(reader["artikel_id"]),
                                                           Convert.ToInt32(reader["product_id"]),
                                                           Convert.ToInt32(reader["leverancier_id"]));
-                return Artikel;
+                return artikel;
             }
             catch (Exception e)
             {
