@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Proftaak_B22__Life.Forms"
         mc:Ignorable="d"
-        Title="ProductForm" Height="789.6" Width="996">
+        Title="@Life - Product" Height="789.6" Width="996">
     <Grid RenderTransformOrigin="0.427,0.413" Margin="0,0,-0.4,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="18*"/>

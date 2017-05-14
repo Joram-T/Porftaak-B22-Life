@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Proftaak_B22__Life.Forms"
         mc:Ignorable="d"
-        Title="BestellingForm" Height="768" Width="1024">
+        Title="@Life - Bestelling" Height="768" Width="1024">
     <Grid>
         <ListBox x:Name="lbGesloten" HorizontalAlignment="Left" Height="695" VerticalAlignment="Top" Width="200" Margin="10,41,0,-7" SelectionChanged="lbGesloten_SelectionChanged"/>
         <ListBox x:Name="lbOpen" HorizontalAlignment="Left" Height="686" VerticalAlignment="Top" Width="200" Margin="232,41,0,0" SelectionChanged="lbOpen_SelectionChanged"/>

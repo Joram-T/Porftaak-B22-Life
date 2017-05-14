@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Proftaak_B22__Life"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="@Life - Login" Height="350" Width="525">
     <Grid>
         <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="23" Margin="204,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154"/>
         <Label x:Name="label1" Content="Email" HorizontalAlignment="Left" Margin="161,195,0,0" VerticalAlignment="Top"/>
