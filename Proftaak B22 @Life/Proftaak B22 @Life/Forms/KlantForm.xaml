@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Proftaak_B22__Life.Forms"
         mc:Ignorable="d"
-        Title="KlantForm" Height="768" Width="1024">
+        Title="@Life - Klant" Height="768" Width="1024">
     <Grid>
         <ListBox x:Name="lb_Klanten" HorizontalAlignment="Left" Height="410" Margin="10,49,0,0" VerticalAlignment="Top" Width="271" SelectionChanged="lb_Klanten_SelectionChanged">
             <ListBox.Effect>
