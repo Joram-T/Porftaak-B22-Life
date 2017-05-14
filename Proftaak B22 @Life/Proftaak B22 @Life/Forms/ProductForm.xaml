@@ -12,7 +12,7 @@
             <ColumnDefinition Width="951*"/>
             <ColumnDefinition Width="20*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="lblLeverancier" Content="" HorizontalAlignment="Left" Margin="342.6,97,0,0" VerticalAlignment="Top" Height="64" Width="456" FontSize="30" FontWeight="Bold" Grid.Column="1"/>
+        <Label x:Name="lblLeverancier" Content="" HorizontalAlignment="Left" Margin="342.6,92,0,0" VerticalAlignment="Top" Height="64" Width="204" FontSize="30" FontWeight="Bold" Grid.Column="1"/>
         <TextBox x:Name="tb_Search" HorizontalAlignment="Left" Height="34" Margin="4.6,10,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="271" FontSize="22" FontStyle="Italic" TextDecorations="{x:Null}" Opacity="0.5" BorderBrush="#FF0D0D0E" Background="{x:Null}" SelectionBrush="#FFA4A7AB" GotFocus="tb_Search_GotFocus" TextChanged="tb_Search_TextChanged" Grid.Column="1"/>
         <ListBox x:Name="lb_Artikelen" Height="554" Margin="4.6,44,0,0" VerticalAlignment="Top" Width="271" HorizontalAlignment="Left" Foreground="Black" SelectionChanged="lb_Artikelen_SelectionChanged" Grid.Column="1">
             <ListBox.Effect>
@@ -36,7 +36,8 @@
             </Grid>
         </GroupBox>
         <Label Content="Leverancier" HorizontalAlignment="Left" Margin="342.6,34,0,0" VerticalAlignment="Top" Height="64" Width="166" FontSize="24" Grid.Column="1"/>
-        <Label Content="Product" HorizontalAlignment="Left" Margin="503.6,34,0,0" VerticalAlignment="Top" Height="64" Width="166" FontSize="24" Grid.Column="1"/>
+        <Label Content="Product" HorizontalAlignment="Left" Margin="551.6,34,0,0" VerticalAlignment="Top" Height="64" Width="166" FontSize="24" Grid.Column="1"/>
+        <Label x:Name="lblProduct" Content="" HorizontalAlignment="Left" Margin="546.6,92,0,0" VerticalAlignment="Top" Height="64" Width="205" FontSize="30" FontWeight="Bold" Grid.Column="1"/>
 
     </Grid>
 </Window>

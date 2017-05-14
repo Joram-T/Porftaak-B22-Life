@@ -55,8 +55,8 @@ namespace Proftaak_B22__Life.Forms
                 selectedArtikel = lb_Artikelen.SelectedItem.ToString();
                 string leverancier = selectedArtikel.Split(' ')[1];
                 string product = selectedArtikel.Split(' ')[2];
-                lblLeverancier.Content = leverancierContext.GetLeverancierByID(Convert.ToInt32(leverancier)).Name + ", " + productContext.GetProductByID(Convert.ToInt32(product));
-
+                lblLeverancier.Content = leverancierContext.GetLeverancierByID(Convert.ToInt32(leverancier)).Name;
+                lblProduct.Content = productContext.GetProductByID(Convert.ToInt32(product));
             }
         }
 
