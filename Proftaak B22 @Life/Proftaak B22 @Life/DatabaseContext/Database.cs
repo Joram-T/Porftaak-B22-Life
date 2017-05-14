@@ -17,9 +17,9 @@ namespace Proftaak_B22__Life.Class
         {
             get
             {
-                SqlConnection connection = new SqlConnection(connectionString);
-                connection.Open();
-                return connection;
+                    SqlConnection connection = new SqlConnection(connectionString);
+                    connection.Open();
+                    return connection;
             }
         }
     }

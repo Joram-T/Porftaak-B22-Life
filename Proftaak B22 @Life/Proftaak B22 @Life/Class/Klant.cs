@@ -9,8 +9,6 @@ namespace Proftaak_B22__Life
 {
     class Klant : User
     {
-        private string text;
-
         //AutoProperty generates private field for us
         public string Zip { get; set; }
 

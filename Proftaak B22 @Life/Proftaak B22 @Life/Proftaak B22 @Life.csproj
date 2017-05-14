@@ -63,10 +63,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\HoofdScherm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Forms\KlantForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -98,9 +94,6 @@
     </Compile>
     <Compile Include="Forms\BestellingForm.xaml.cs">
       <DependentUpon>BestellingForm.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\HoofdScherm.xaml.cs">
-      <DependentUpon>HoofdScherm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\KlantForm.xaml.cs">
       <DependentUpon>KlantForm.xaml</DependentUpon>

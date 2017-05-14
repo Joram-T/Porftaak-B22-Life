@@ -89,14 +89,22 @@ namespace Proftaak_B22__Life.Forms
 
         private void btnKlantToevoegen_Click(object sender, RoutedEventArgs e)
         {
-            Klant klant = new Klant(tbInserKlantVoornaam.Text, tbInsertKlantTussenvoegsel.Text, tbInsertKlantAchternaam.Text, tbInsertKlantAdres.Text, tbInsertKlantWoonplaats.Text, tbInsertKlantPostcode.Text);
-            klantContext.InsertKlant(klant);
-            MessageBox.Show("Klant is toegevoegd!");
-            lb_Klanten.Items.Clear();
-            foreach (Klant k in klantContext.GetAllKlanten())
+            if (tbInserKlantVoornaam.Text == "" || tbInsertKlantAchternaam.Text == "" || tbInsertKlantAdres.Text == "" || tbInsertKlantPostcode.Text == "" || tbInsertKlantWoonplaats.Text == "")
             {
-                lb_Klanten.Items.Add(k.ToString());
+                MessageBox.Show("Gelieve alle velden in te vullen!");
             }
+            else
+            {
+                Klant klant = new Klant(tbInserKlantVoornaam.Text, tbInsertKlantTussenvoegsel.Text, tbInsertKlantAchternaam.Text, tbInsertKlantAdres.Text, tbInsertKlantWoonplaats.Text, tbInsertKlantPostcode.Text);
+                klantContext.InsertKlant(klant);
+                MessageBox.Show("Klant is toegevoegd!");
+                lb_Klanten.Items.Clear();
+                foreach (Klant k in klantContext.GetAllKlanten())
+                {
+                    lb_Klanten.Items.Add(k.ToString());
+                }
+            }
+            
         }
 
         private void btnKlantToevoegenReset_Click(object sender, RoutedEventArgs e)

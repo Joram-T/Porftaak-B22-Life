@@ -126,25 +126,33 @@ namespace Proftaak_B22__Life.Forms
         {
             try
             {
-                Account account = new Account(tbInsertMedEmail.Text, tbInsertMedWachtwoord.Text);
-                if (accountContext.Login(account) != null)
+                if (tbInsertMedEmail.Text != "" || tbInsertMedWachtwoord.Text != "" || tbInsertMedAchternaam.Text != "" || tbInsertMedNaam.Text != "")
                 {
-                    MessageBox.Show("Er is al een medewerker met deze inloggegevens!");
+                    Account account = new Account(tbInsertMedEmail.Text, tbInsertMedWachtwoord.Text);
+                    if (accountContext.Login(account) != null)
+                    {
+                        MessageBox.Show("Er is al een medewerker met deze inloggegevens!");
+                    }
+                    else
+                    {
+                        accountContext.InsertAccount(account);
+                        medewerkerContext.InsertMedewerker(new Medewerker(account, tbInsertMedNaam.Text,
+                            tbInsertMedTussenvoegsel.Text, tbInsertMedAchternaam.Text, tbInsertMedAdres.Text,
+                            tbInsertMedStad.Text));
+                        MessageBox.Show("Medewerker is toegevoegd!");
+                        lb_Werknemers.Items.Clear();
+                        foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
+                        {
+                            lb_Werknemers.Items.Add(m.ToString());
+                        }
+                    }
                 }
                 else
                 {
-                    accountContext.InsertAccount(account);
-                    medewerkerContext.InsertMedewerker(new Medewerker(account, tbInsertMedNaam.Text,
-                        tbInsertMedTussenvoegsel.Text, tbInsertMedAchternaam.Text, tbInsertMedAdres.Text,
-                        tbInsertMedStad.Text));
-                    MessageBox.Show("Medewerker is toegevoegd!");
-                    lb_Werknemers.Items.Clear();
-                    foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
-                    {
-                        lb_Werknemers.Items.Add(m.ToString());
-                    }
+                    MessageBox.Show("Gelieve alle velden in te vullen!");
                 }
             }
+                
             catch (Exception ex)
             {
                 MessageBox.Show("Oeps! Kijk of de gegevens goed ingevuld zijn.");
