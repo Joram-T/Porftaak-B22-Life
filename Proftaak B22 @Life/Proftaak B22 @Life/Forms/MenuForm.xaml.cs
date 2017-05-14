@@ -25,16 +25,6 @@ namespace Proftaak_B22__Life.Forms
             InitializeComponent();
         }
 
-        private void btnRooster_Click(object sender, RoutedEventArgs e)
-        {
-            RoosterForm rf = new RoosterForm(actief);
-            if (CheckActive(rf))
-            {
-                actief.Add(rf);
-                rf.Show();
-            }
-        }
-
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             string messageBoxText = "Wilt u terug naar de login pagina?";

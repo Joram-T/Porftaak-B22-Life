@@ -114,10 +114,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\RoosterForm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\Medewerker.cs" />
@@ -129,9 +125,6 @@
     </Compile>
     <Compile Include="Forms\ProductForm.xaml.cs">
       <DependentUpon>ProductForm.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\RoosterForm.xaml.cs">
-      <DependentUpon>RoosterForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
