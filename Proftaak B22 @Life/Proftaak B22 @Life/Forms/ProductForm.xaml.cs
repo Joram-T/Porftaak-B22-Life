@@ -123,9 +123,10 @@ namespace Proftaak_B22__Life.Forms
                 }
             }
 
-            catch
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show("Oeps! Er is iets verkeerd gegaan.");
+                Console.WriteLine(ex.Message);
             }
         }
 

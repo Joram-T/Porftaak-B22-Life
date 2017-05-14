@@ -103,13 +103,17 @@ namespace Proftaak_B22__Life.Forms
         {
             try
             {
-                leverancierContext.InsertLeverancier(new Leverancier(tbInsertLevNaam.Text, tbInsertLevAdres.Text, tbInsertLevStad.Text));
-                MessageBox.Show("Leverancier is toegevoegd!");
-                lb_Leveranciers.Items.Clear();
-                foreach (Leverancier l in leverancierContext.GetAllLeveranciers())
+                if (tbInsertLevNaam.Text != "" || tbInsertLevAdres.Text != "" || tbInsertLevStad.Text != "")
                 {
-                    lb_Leveranciers.Items.Add(l.ToString());
+                    leverancierContext.InsertLeverancier(new Leverancier(tbInsertLevNaam.Text, tbInsertLevAdres.Text, tbInsertLevStad.Text));
+                    MessageBox.Show("Leverancier is toegevoegd!");
+                    lb_Leveranciers.Items.Clear();
+                    foreach (Leverancier l in leverancierContext.GetAllLeveranciers())
+                    {
+                        lb_Leveranciers.Items.Add(l.ToString());
+                    }
                 }
+
             }
 
             catch

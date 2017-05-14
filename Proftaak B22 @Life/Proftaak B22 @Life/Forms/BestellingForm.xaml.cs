@@ -93,16 +93,24 @@ namespace Proftaak_B22__Life.Forms
 
         private void FillLb()
         {
-            lbOpen.Items.Clear();
-            lbGesloten.Items.Clear();
-            foreach (Bestelling b in bestellingcontext.GetOpenBestellingen())
+            try
             {
-                lbOpen.Items.Add(b);
+                lbOpen.Items.Clear();
+                lbGesloten.Items.Clear();
+                foreach (Bestelling b in bestellingcontext.GetOpenBestellingen())
+                {
+                    lbOpen.Items.Add(b);
+                }
+                foreach (Bestelling b in bestellingcontext.GetGeslotenBestellingen())
+                {
+                    lbGesloten.Items.Add(b);
+                }
             }
-            foreach (Bestelling b in bestellingcontext.GetGeslotenBestellingen())
+            catch (Exception e)
             {
-                lbGesloten.Items.Add(b);
+                Console.WriteLine(e);
             }
+
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -132,14 +140,22 @@ namespace Proftaak_B22__Life.Forms
 
         private void btnSave_Click_1(object sender, RoutedEventArgs e)
         {
-            if (selectedid != -1)
+            try
             {
-               bestellingcontext.UpdateBestelling(selectedid, Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpBetaal.Text), Convert.ToDateTime(dpLever.Text));
+                if (selectedid != -1)
+                {
+                   bestellingcontext.UpdateBestelling(selectedid, Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpLever.Text), Convert.ToDateTime(dpBetaal.Text));
+                }
+                else
+                {
+                    bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpLever.Text), Convert.ToDateTime(dpBetaal.Text));
+                }
             }
-            else
+            catch (Exception exception)
             {
-                bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpBetaal.Text), Convert.ToDateTime(dpLever.Text));
+                Console.WriteLine(exception);
             }
+
             lbGesloten.Items.Clear();
             lbOpen.Items.Clear();
             FillLb();
@@ -156,24 +172,32 @@ namespace Proftaak_B22__Life.Forms
 
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
-            lbGesloten.SelectedIndex = -1;
-            lbOpen.SelectedIndex = 1;
-            selectedid = -1;
-            lblKlant.Content = "Klant ID:";
-            lblMedewerker.Content = "Medewerker ID:";
-            tbKlant.Text = "";
-            tbMedewerker.Text = "";
-            dpBestel.ClearValue(DatePicker.SelectedDateProperty);
-            dpLever.ClearValue(DatePicker.SelectedDateProperty);
-            dpBetaal.ClearValue(DatePicker.SelectedDateProperty);
-            tbMedewerker.IsEnabled = true;
-            dpBestel.IsEnabled = true;
-            tbKlant.IsEnabled = true;
-            dpLever.IsEnabled = true;
-            dpBetaal.IsEnabled = true;
-            btnSave.IsEnabled = true;
-            btnEdit.IsEnabled = false;
-            btnSluit.IsEnabled = false;
+            try
+            {
+                lbGesloten.SelectedIndex = -1;
+                lbOpen.SelectedIndex = 1;
+                selectedid = -1;
+                lblKlant.Content = "Klant ID:";
+                lblMedewerker.Content = "Medewerker ID:";
+                tbKlant.Text = "";
+                tbMedewerker.Text = "";
+                dpBestel.ClearValue(DatePicker.SelectedDateProperty);
+                dpLever.ClearValue(DatePicker.SelectedDateProperty);
+                dpBetaal.ClearValue(DatePicker.SelectedDateProperty);
+                tbMedewerker.IsEnabled = true;
+                dpBestel.IsEnabled = true;
+                tbKlant.IsEnabled = true;
+                dpLever.IsEnabled = true;
+                dpBetaal.IsEnabled = true;
+                btnSave.IsEnabled = true;
+                btnEdit.IsEnabled = false;
+                btnSluit.IsEnabled = false;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
+
         }
     }
     }

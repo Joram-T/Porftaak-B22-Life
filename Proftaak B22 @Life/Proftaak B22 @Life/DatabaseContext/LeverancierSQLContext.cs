@@ -55,7 +55,7 @@ namespace Proftaak_B22__Life.DatabaseContext
         {
             using (SqlConnection connection = Database.Connection)
             {
-                string query = "SELECT MAX(account_id) FROM Account";
+                string query = "SELECT MAX(Leverancier_id) FROM Leverancier";
                     query = "INSERT INTO Leverancier VALUES(@naam, @adres, @woonplaats)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {

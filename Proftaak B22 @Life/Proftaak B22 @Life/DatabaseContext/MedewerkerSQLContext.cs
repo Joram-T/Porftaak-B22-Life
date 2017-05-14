@@ -101,11 +101,12 @@ namespace Proftaak_B22__Life.DatabaseContext
                     }
                 }
                     //daarna een medewerker inserten met het verkregen accountid
-                    query = "INSERT INTO Medewerker VALUES(@managerid, @accountid, @voornaam, @achternaam, @tussenvoegsel, @adres, @woonplaats)";
+                    query = "INSERT INTO Medewerker VALUES(NULL, NULL, @account_id, @voornaam, @achternaam, @tussenvoegsel, @adres, @woonplaats)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@managerid", DBNull.Value);
-                    command.Parameters.AddWithValue("@accountid", LastAccountID);
+                    //command.Parameters.AddWithValue("@profielfoto", DBNull.Value);
+                    //command.Parameters.AddWithValue("@manager_id", DBNull.Value);
+                    command.Parameters.AddWithValue("@account_id", Convert.ToInt32(LastAccountID));
                     command.Parameters.AddWithValue("@voornaam", medewerker.FirstName);
                     command.Parameters.AddWithValue("@achternaam", medewerker.LastName);
                     command.Parameters.AddWithValue("@tussenvoegsel", medewerker.Insertion);
@@ -118,7 +119,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     catch (Exception e)
                     {
 
-                        throw e;
+                        Console.WriteLine(e.Message);
                     }
                 }
             }

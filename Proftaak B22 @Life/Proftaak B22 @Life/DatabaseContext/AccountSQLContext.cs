@@ -10,25 +10,27 @@ namespace Proftaak_B22__Life.DatabaseContext
 {
     class AccountSQLContext
     {
-        public Account Login(string email, string password)
+        public Account Login(Account account)
         {
-            using (SqlConnection connection = Database.Connection)
-            {
-                string query = "SELECT * FROM Account WHERE UPPER(email) = @email AND wachtwoord = @password";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlConnection connection = Database.Connection)
                 {
-                    command.Parameters.AddWithValue("@email", email.ToUpper());
-                    command.Parameters.AddWithValue("@password", password);
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    string query = "SELECT * FROM Account WHERE UPPER(email) = @email AND wachtwoord = @password";
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        while (reader.Read())
+                        command.Parameters.AddWithValue("@email", account.Email.ToUpper());
+                        command.Parameters.AddWithValue("@password", account.Wachtwoord);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            return CreateAccountFromReader(reader);
+                            while (reader.Read())
+                            {
+                                return CreateAccountFromReader(reader);
+                            }
+                            return null;
                         }
-                        return null;
                     }
                 }
-            }
+
+
         }
 
         public Account GetAccountByID(int id)
@@ -55,7 +57,8 @@ namespace Proftaak_B22__Life.DatabaseContext
         {
             using (SqlConnection connection = Database.Connection)
             {
-                string query = "INSERT INTO Account VALUES(@email, @wachtwoord)";
+                string query = "SELECT MAX(account_id) FROM Account";
+                query = "INSERT INTO Account VALUES(@email, @wachtwoord)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@email", account.Email);

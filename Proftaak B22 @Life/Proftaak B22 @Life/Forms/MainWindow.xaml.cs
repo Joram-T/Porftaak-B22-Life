@@ -29,16 +29,21 @@ namespace Proftaak_B22__Life
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (accountContext.Login(tbEmail.Text, tbWachtwoord.Password) != null)
+            if (tbEmail.Text != "" || tbWachtwoord.Password != "")
             {
-                Proftaak_B22__Life.Forms.MenuForm mf = new Proftaak_B22__Life.Forms.MenuForm ();
-                mf.Show();
-                this.Close();
+                Account account = new Account(tbEmail.Text, tbWachtwoord.Password);
+                if (accountContext.Login(account) != null)
+                {
+                    Proftaak_B22__Life.Forms.MenuForm mf = new Proftaak_B22__Life.Forms.MenuForm();
+                    mf.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Onjuist Email of Wachtwoord");
+                }
             }
-            else
-            {
-                MessageBox.Show("Onjuist Email of Wachtwoord");
-            }
+
         }
    }
 }

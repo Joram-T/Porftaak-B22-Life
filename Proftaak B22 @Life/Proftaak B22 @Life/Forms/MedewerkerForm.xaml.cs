@@ -124,21 +124,34 @@ namespace Proftaak_B22__Life.Forms
 
         private void btnMedToevoegen_Click(object sender, RoutedEventArgs e)
         {
-            if (accountContext.Login(tbInsertMedEmail.Text, tbInsertMedWachtwoord.Text) != null)
-            {
-                MessageBox.Show("Er is al een medewerker met deze inloggegevens!");
-            }
-            else
+            try
             {
                 Account account = new Account(tbInsertMedEmail.Text, tbInsertMedWachtwoord.Text);
-                accountContext.InsertAccount(account);
-                medewerkerContext.InsertMedewerker(new Medewerker(account, tbInsertMedNaam.Text, tbInsertMedTussenvoegsel.Text, tbInsertMedAchternaam.Text, tbInsertMedAdres.Text, tbInsertMedStad.Text));
-                MessageBox.Show("Medewerker is toegevoegd!");
-                foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
+                if (accountContext.Login(account) != null)
                 {
-                    lb_Werknemers.Items.Add(m.ToString());
+                    MessageBox.Show("Er is al een medewerker met deze inloggegevens!");
+                }
+                else
+                {
+                    accountContext.InsertAccount(account);
+                    medewerkerContext.InsertMedewerker(new Medewerker(account, tbInsertMedNaam.Text,
+                        tbInsertMedTussenvoegsel.Text, tbInsertMedAchternaam.Text, tbInsertMedAdres.Text,
+                        tbInsertMedStad.Text));
+                    MessageBox.Show("Medewerker is toegevoegd!");
+                    lb_Werknemers.Items.Clear();
+                    foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
+                    {
+                        lb_Werknemers.Items.Add(m.ToString());
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oeps! Kijk of de gegevens goed ingevuld zijn.");
+                Console.WriteLine(ex.Message);
+            }
+
+
         }
 
         private void btnMedToevoegenReset_Click(object sender, RoutedEventArgs e)
@@ -181,7 +194,7 @@ namespace Proftaak_B22__Life.Forms
         {
             OpenFileDialog open = new OpenFileDialog();
             open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
-
+            
             if (open.ShowDialog() == true)
             {
                 byte[] profielfoto = File.ReadAllBytes(open.FileName);

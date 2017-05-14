@@ -84,8 +84,7 @@ namespace Proftaak_B22__Life.DatabaseContext
         {
             using (SqlConnection connection = Database.Connection)
             {
-                string query = "SELECT MAX(artikel_id) FROM Artikel";
-                query = "INSERT INTO Artikel VALUES(@product_id, @leverancier_id)";
+                string query = "INSERT INTO Artikel VALUES(@product_id, @leverancier_id)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@product_id", Artikel.Productid);
@@ -96,7 +95,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     }
                     catch (Exception e)
                     {
-
+                        Console.WriteLine(e.Message);
                         throw e;
                     }
                 }
