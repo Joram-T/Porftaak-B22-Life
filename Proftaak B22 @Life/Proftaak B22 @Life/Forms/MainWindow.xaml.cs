@@ -32,16 +32,25 @@ namespace Proftaak_B22__Life
             if (tbEmail.Text != "" || tbWachtwoord.Password != "")
             {
                 Account account = new Account(tbEmail.Text, tbWachtwoord.Password);
-                if (accountContext.Login(account) != null)
+                try
                 {
-                    Proftaak_B22__Life.Forms.MenuForm mf = new Proftaak_B22__Life.Forms.MenuForm();
-                    mf.Show();
-                    this.Close();
+                    if (accountContext.Login(account) != null)
+                    {
+                        Proftaak_B22__Life.Forms.MenuForm mf = new Proftaak_B22__Life.Forms.MenuForm();
+                        mf.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Onjuist Email of Wachtwoord");
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    MessageBox.Show("Onjuist Email of Wachtwoord");
+
+                    MessageBox.Show("Er is geen verbinding met de SQL server!");
                 }
+                
             }
 
         }
