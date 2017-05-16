@@ -126,8 +126,8 @@ namespace Proftaak_B22__Life.Forms
         {
             try
             {
-                if (tbInsertMedEmail.Text != "" || tbInsertMedWachtwoord.Text != "" || tbInsertMedAchternaam.Text != "" || tbInsertMedNaam.Text != "")
-                {
+                //if (tbInsertMedEmail.Text != "" || tbInsertMedWachtwoord.Text != "" || tbInsertMedAchternaam.Text != "" || tbInsertMedNaam.Text != "")
+                //{
                     Account account = new Account(tbInsertMedEmail.Text, tbInsertMedWachtwoord.Text);
                     if (accountContext.Login(account) != null)
                     {
@@ -146,11 +146,11 @@ namespace Proftaak_B22__Life.Forms
                             lb_Werknemers.Items.Add(m.ToString());
                         }
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Gelieve alle velden in te vullen!");
-                }
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Gelieve alle velden in te vullen!");
+                //}
             }
                 
             catch (Exception ex)
