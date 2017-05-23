@@ -144,19 +144,35 @@ namespace Proftaak_B22__Life.Forms
         private void btnSave_Click_1(object sender, RoutedEventArgs e)
         {
             try
-            {
+            {               
                 if (selectedid != -1)
                 {
                    bestellingcontext.UpdateBestelling(selectedid, Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpLever.Text), Convert.ToDateTime(dpBetaal.Text));
                 }
                 else
                 {
-                    bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpLever.Text), Convert.ToDateTime(dpBetaal.Text));
+                    if (dpBetaal.Text == "" && dpLever.Text == "")
+                    {
+                        bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text));
+                    }
+                    else if (dpBetaal.Text == "" && dpLever.Text != "")
+                    {
+                        bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpLever.Text));
+                    }
+                    else if (dpBetaal.Text != "" && dpLever.Text != "")
+                    {
+                        bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text), betaaldatum: Convert.ToDateTime(dpBetaal.Text));
+                    }
+                    else
+                    {
+                        bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpLever.Text), Convert.ToDateTime(dpBetaal.Text));
+                    }
+                    
                 }
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                MessageBox.Show(exception.Message);
             }
 
             lbGesloten.Items.Clear();
