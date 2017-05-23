@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="@Life - Medewerker" Height="768" Width="1024">
     <Grid Width="1024" Height="768">
-        <ListBox x:Name="lb_Werknemers" Height="392" Margin="10,49,0,0" VerticalAlignment="Top" Width="271" HorizontalAlignment="Left" Foreground="Black" SelectionChanged="lb_Werknemers_SelectionChanged">
+        <ListBox x:Name="lb_Werknemers" x:FieldModifier="public" Height="392" Margin="10,49,0,0" VerticalAlignment="Top" Width="271" HorizontalAlignment="Left" Foreground="Black" SelectionChanged="lb_Werknemers_SelectionChanged">
             <ListBox.Effect>
                 <DropShadowEffect/>
             </ListBox.Effect>

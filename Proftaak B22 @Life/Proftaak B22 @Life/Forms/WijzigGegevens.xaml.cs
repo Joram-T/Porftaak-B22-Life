@@ -21,7 +21,6 @@ namespace Proftaak_B22__Life.Forms
     public partial class WijzigGegevens : Window
     {
         Medewerker currentMedewerker;
-        ListBox lbox;
         MedewerkerSQLContext medewerkerContext = new MedewerkerSQLContext();
         public WijzigGegevens(Medewerker medewerker)
         {
@@ -57,7 +56,17 @@ namespace Proftaak_B22__Life.Forms
                 woonplaats = null;
             }
             medewerkerContext.UpdateMedewerker(this.currentMedewerker, voornaam, achternaam, tussenvoegsel, woonplaats,adres);
-            lbox.Items.Refresh();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(MedewerkerForm))
+                {
+                    (window as MedewerkerForm).lb_Werknemers.Items.Clear();
+                    foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
+                    {
+                        (window as MedewerkerForm).lb_Werknemers.Items.Add(m.ToString());
+                    }
+                }
+            }
             this.Close();
         }
 

@@ -30,7 +30,7 @@ namespace Proftaak_B22__Life.Forms
         private List<Window> actief;
         string selectedwerknemer = "";
         Medewerker currentMedewerker;
-        public static ListBox ListBoxReference;
+       
         public MedewerkerForm(List<Window> actief)
         {
             InitializeComponent();
@@ -41,7 +41,6 @@ namespace Proftaak_B22__Life.Forms
                 lb_Werknemers.Items.Add(m.ToString());
             }
             this.actief = actief;
-            ListBoxReference = lb_Werknemers;
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -223,9 +222,10 @@ namespace Proftaak_B22__Life.Forms
         }
 
         private void btnWijzigGegevens_Click(object sender, RoutedEventArgs e)
-        {
+        {   
             WijzigGegevens wg = new WijzigGegevens(this.currentMedewerker);
             wg.Show();
         }
+        
     }
 }
