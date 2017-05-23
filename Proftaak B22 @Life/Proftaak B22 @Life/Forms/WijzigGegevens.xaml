@@ -1,0 +1,28 @@
+﻿<Window x:Class="Proftaak_B22__Life.Forms.WijzigGegevens"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Proftaak_B22__Life.Forms"
+        mc:Ignorable="d"
+        Title="WijzigGegevens" Height="300" Width="300">
+    <Grid>
+        <GroupBox x:Name="groupBox" Header="Wijzig gegevens" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="250" Width="274">
+            <Grid HorizontalAlignment="Left" Margin="0,10,-3.2,-12.8" Width="264">
+                <TextBox x:Name="tbVoornaam" HorizontalAlignment="Left" Height="23" Margin="108,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                <Label x:Name="label" Content="Voornaam" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblAchternaam" Content="Achternaam" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label2" Content="Tussenvoegsel" HorizontalAlignment="Left" Margin="11,69,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label1" Content="Adres" HorizontalAlignment="Left" Margin="11,100,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label3" Content="Woonplaats" HorizontalAlignment="Left" Margin="11,131,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbAchternaam" HorizontalAlignment="Left" Height="23" Margin="108,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                <TextBox x:Name="tbTussenvoegsel" HorizontalAlignment="Left" Height="23" Margin="108,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                <TextBox x:Name="tbAdres" HorizontalAlignment="Left" Height="23" Margin="108,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                <TextBox x:Name="tbWoonplaats" HorizontalAlignment="Left" Height="23" Margin="109,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+                <Button x:Name="btnOpslaan" Content="Opslaan" HorizontalAlignment="Left" Margin="98,186,0,0" VerticalAlignment="Top" Width="75" Click="btnOpslaan_Click"/>
+                <Button x:Name="btnReset" Content="Reset" HorizontalAlignment="Left" Margin="178,186,0,0" VerticalAlignment="Top" Width="75" Click="btnReset_Click"/>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>
