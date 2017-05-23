@@ -1,6 +1,6 @@
 ﻿namespace Proftaak_B22__Life
 {
-     class Account
+     public class Account
     {
         //AutoProperty generates private field for us
         public int ID { get; }

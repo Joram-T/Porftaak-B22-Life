@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Proftaak_B22__Life.Class
 {
-    abstract class User
+    public abstract class User
     {
         public int ID { get; set; }
         public string FirstName { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proftaak_B22__Life
 {
-    class Medewerker: User
+    public class Medewerker: User
     {
         byte[] Profielfoto { get; set; }
         Account Account { get; set; }

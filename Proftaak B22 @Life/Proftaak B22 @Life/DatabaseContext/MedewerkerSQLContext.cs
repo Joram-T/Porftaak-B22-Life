@@ -1,6 +1,7 @@
 ﻿using Proftaak_B22__Life.Class;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -158,6 +159,35 @@ namespace Proftaak_B22__Life.DatabaseContext
                 {
                     command.Parameters.AddWithValue("@medewerker_id", medewerker.ID);
                     command.Parameters.AddWithValue("@profielfoto", profielfoto);
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
+                }
+
+            }
+        }
+
+        public void UpdateMedewerker(Medewerker medewerker, string voornaam, string achternaam, string tussenvoegsel, string woonplaats, string adres)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+               
+
+                using (SqlCommand command = new SqlCommand("spUpdateUser", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@medewerker_id", medewerker.ID);
+                    command.Parameters.AddWithValue("@voornaam", voornaam);
+                    command.Parameters.AddWithValue("@achternaam", achternaam);
+                    command.Parameters.AddWithValue("@tussenvoegsel", tussenvoegsel);
+                    command.Parameters.AddWithValue("@woonplaats", woonplaats);
+                    command.Parameters.AddWithValue("@adres", adres);
 
                     try
                     {
