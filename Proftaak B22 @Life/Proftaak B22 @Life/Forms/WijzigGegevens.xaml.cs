@@ -1,4 +1,5 @@
-﻿using Proftaak_B22__Life.DatabaseContext;
+﻿using Proftaak_B22__Life.Class;
+using Proftaak_B22__Life.DatabaseContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,13 @@ namespace Proftaak_B22__Life.Forms
     /// </summary>
     public partial class WijzigGegevens : Window
     {
-        Medewerker currentMedewerker;
+        User currentUser;
         MedewerkerSQLContext medewerkerContext = new MedewerkerSQLContext();
-        public WijzigGegevens(Medewerker medewerker)
+        KlantSQLContext klantContext = new KlantSQLContext();
+        public WijzigGegevens(User user)
         {
             InitializeComponent();
-            this.currentMedewerker = medewerker;
+            this.currentUser = user;
         }
 
         private void btnOpslaan_Click(object sender, RoutedEventArgs e)
@@ -55,7 +57,17 @@ namespace Proftaak_B22__Life.Forms
             {
                 woonplaats = null;
             }
-            medewerkerContext.UpdateMedewerker(this.currentMedewerker, voornaam, achternaam, tussenvoegsel, woonplaats,adres);
+
+
+            if (currentUser.GetType() == typeof(Medewerker))
+            {
+                medewerkerContext.UpdateMedewerker(this.currentUser as Medewerker, voornaam, achternaam, tussenvoegsel, woonplaats, adres);
+            }
+            else
+            {
+                klantContext.UpdateKlant(this.currentUser as Klant, voornaam, achternaam, tussenvoegsel, woonplaats, adres);
+            }
+        
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(MedewerkerForm))
@@ -64,6 +76,14 @@ namespace Proftaak_B22__Life.Forms
                     foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
                     {
                         (window as MedewerkerForm).lb_Werknemers.Items.Add(m.ToString());
+                    }
+                }
+                else if (window.GetType() == typeof(KlantForm))
+                {
+                    (window as KlantForm).lb_Klanten.Items.Clear();
+                    foreach (Klant k in klantContext.GetAllKlanten())
+                    {
+                        (window as KlantForm).lb_Klanten.Items.Add(k.ToString());
                     }
                 }
             }

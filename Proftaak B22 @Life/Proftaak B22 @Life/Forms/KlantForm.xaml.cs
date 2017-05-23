@@ -26,9 +26,11 @@ namespace Proftaak_B22__Life.Forms
         ProductSQLContext productContext = new ProductSQLContext();
         string selectedklant;
         private List<Window> actief;
+        Klant currentKlant;
         public KlantForm(List<Window> actief)
         {
             InitializeComponent();
+            btnWijzigGegevensKlant.Visibility = Visibility.Hidden;
             this.actief = actief;
             foreach (Klant klant in klantContext.GetAllKlanten())
             {
@@ -121,6 +123,7 @@ namespace Proftaak_B22__Life.Forms
         {
             if (lb_Klanten.SelectedIndex != -1)
             {
+                btnWijzigGegevensKlant.Visibility = Visibility.Visible;
                 selectedklant = lb_Klanten.SelectedItem.ToString();
                 int id = Convert.ToInt32(selectedklant.Split(' ')[0]);
                 lblKlantNaam.Content = klantContext.GetKlantByID(id).Insertion + " " + klantContext.GetKlantByID(id).LastName + ", " + klantContext.GetKlantByID(id).FirstName;
@@ -129,7 +132,7 @@ namespace Proftaak_B22__Life.Forms
                 lblPostcodeKlant.Content = klantContext.GetKlantByID(id).Zip;
 
 
-                Klant currentKlant = klantContext.GetKlantByID(id);
+                currentKlant = klantContext.GetKlantByID(id);
                 List<Bestelling> openbestellingen = new List<Bestelling>();
                 List<Bestelling> geslotenbestellingen = new List<Bestelling>();
                 openbestellingen = klantContext.GetOpenBestellingenForKlant(currentKlant);
@@ -178,6 +181,12 @@ namespace Proftaak_B22__Life.Forms
                     lvBestellingArtikelen.Items.Add(new string[] { a.Artikelid.ToString(), artikelproduct.Name, "€" + artikelproduct.Price.ToString() });
                 }
             }
+        }
+
+        private void btnWijzigGegevensKlant_Click(object sender, RoutedEventArgs e)
+        {
+            WijzigGegevens wg = new WijzigGegevens(this.currentKlant);
+            wg.Show();
         }
     }
 }

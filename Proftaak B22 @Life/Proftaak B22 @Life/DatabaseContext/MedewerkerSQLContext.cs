@@ -179,7 +179,7 @@ namespace Proftaak_B22__Life.DatabaseContext
             {
                
 
-                using (SqlCommand command = new SqlCommand("spUpdateUser", connection))
+                using (SqlCommand command = new SqlCommand("spUpdateMedewerker", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@medewerker_id", medewerker.ID);
