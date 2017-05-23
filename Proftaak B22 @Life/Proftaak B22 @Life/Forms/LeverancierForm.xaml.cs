@@ -120,7 +120,7 @@ namespace Proftaak_B22__Life.Forms
 
             }
 
-            catch (Exception E)
+            catch (System.Exception E)
             {
                 Console.WriteLine(E.Message);
             }

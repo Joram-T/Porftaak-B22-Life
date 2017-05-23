@@ -89,6 +89,7 @@
     <Compile Include="DatabaseContext\LeverancierSQLContext.cs" />
     <Compile Include="DatabaseContext\MedewerkerSQLContext.cs" />
     <Compile Include="DatabaseContext\ProductSQLContext.cs" />
+    <Compile Include="Exceptions\SluitBestellingException.cs" />
     <Compile Include="Forms\LeverancierForm.xaml.cs">
       <DependentUpon>LeverancierForm.xaml</DependentUpon>
     </Compile>

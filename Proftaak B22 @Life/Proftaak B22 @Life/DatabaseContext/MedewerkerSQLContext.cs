@@ -94,7 +94,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                             }
                         }
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
 
                         throw e;
@@ -116,7 +116,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     {
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
 
                         Console.WriteLine(e.Message);
@@ -163,7 +163,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     {
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
                         throw e;
                     }

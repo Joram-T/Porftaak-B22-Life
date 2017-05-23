@@ -66,7 +66,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     {
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
 
                         throw e;

@@ -93,7 +93,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     {
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
                         Console.WriteLine(e.Message);
                         throw e;
@@ -112,7 +112,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                                                           Convert.ToInt32(reader["leverancier_id"]));
                 return artikel;
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 throw e;
             }

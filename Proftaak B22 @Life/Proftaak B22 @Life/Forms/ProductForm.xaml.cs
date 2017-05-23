@@ -94,7 +94,7 @@ namespace Proftaak_B22__Life.Forms
                     }
                 }
 
-                catch (Exception ex)
+                catch (System.Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
@@ -123,7 +123,7 @@ namespace Proftaak_B22__Life.Forms
                 }
             }
 
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 MessageBox.Show("Oeps! Er is iets verkeerd gegaan.");
                 Console.WriteLine(ex.Message);
