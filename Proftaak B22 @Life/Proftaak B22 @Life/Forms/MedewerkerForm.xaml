@@ -53,5 +53,6 @@
         </GroupBox>
         <Image x:Name="img_Profielfoto" HorizontalAlignment="Left" Height="191" Margin="331,79,0,0" VerticalAlignment="Top" Width="213"/>
         <Button x:Name="btnVeranderProfielfoto" Content="Verander foto" HorizontalAlignment="Left" Margin="331,275,0,0" VerticalAlignment="Top" Width="86" Click="btnVeranderProfielfoto_Click"/>
+        <Button x:Name="btnWijzigGegevens" Content="Wijzig gegevens" HorizontalAlignment="Left" Margin="422,275,0,0" VerticalAlignment="Top" Width="101" Click="btnWijzigGegevens_Click"/>
     </Grid>
 </Window>
