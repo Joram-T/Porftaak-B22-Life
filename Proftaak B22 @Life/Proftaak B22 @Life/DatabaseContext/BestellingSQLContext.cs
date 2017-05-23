@@ -10,6 +10,8 @@ namespace Proftaak_B22__Life.DatabaseContext
 {
     class BestellingSQLContext
     {
+        DateTime defaultDate = new DateTime(2000,01,01);
+
         public List<Bestelling> GetOpenBestellingen()
         {
             List<Bestelling> result = new List<Bestelling>();
@@ -139,7 +141,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     {
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
 
                         throw e;
@@ -148,7 +150,7 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
         }
 
-        public void UpdateBestelling(int id, DateTime besteldatum, DateTime leverdatum, DateTime betaaldatum)
+        public void UpdateBestelling(int id, DateTime besteldatum, DateTime? leverdatum = null, DateTime? betaaldatum = null)
         {
             using (SqlConnection connection = Database.Connection)
             {
@@ -165,7 +167,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     {
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
 
                         throw e;
@@ -194,7 +196,7 @@ namespace Proftaak_B22__Life.DatabaseContext
 
         }
 
-        public void InsertBestelling(int klant_id, int medewerker_id, DateTime besteldatum, DateTime leverdatum, DateTime betaaldatum)
+        public void InsertBestelling(int klant_id, int medewerker_id, DateTime besteldatum, DateTime? leverdatum = null, DateTime? betaaldatum = null)
         {
             using (SqlConnection connection = Database.Connection)
             {
@@ -206,14 +208,28 @@ namespace Proftaak_B22__Life.DatabaseContext
                     command.Parameters.AddWithValue("@klant_id", klant_id);
                     command.Parameters.AddWithValue("@medewerker_id", medewerker_id);
                     command.Parameters.AddWithValue("@besteldatum", besteldatum);
-                    command.Parameters.AddWithValue("@leverdatum", leverdatum);
-                    command.Parameters.AddWithValue("@betaaldatum", betaaldatum);
+                    if (leverdatum == null)
+                    {
+                        command.Parameters.AddWithValue("@leverdatum", DBNull.Value);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@leverdatum", leverdatum);
+                    }
+                    if (betaaldatum == null)
+                    {
+                        command.Parameters.AddWithValue("@betaaldatum", DBNull.Value);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@betaaldatum", betaaldatum);
+                    }
                     command.Parameters.AddWithValue("@totaalprijs", 0);
                     try
                     {
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
                         throw e;
                     }

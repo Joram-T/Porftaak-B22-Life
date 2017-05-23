@@ -45,7 +45,7 @@ namespace Proftaak_B22__Life
                         MessageBox.Show("Onjuist Email of Wachtwoord");
                     }
                 }
-                catch (Exception)
+                catch (System.Exception)
                 {
 
                     MessageBox.Show("Er is geen verbinding met de SQL server!");

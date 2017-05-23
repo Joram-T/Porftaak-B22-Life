@@ -49,7 +49,7 @@ namespace Proftaak_B22__Life.Forms
                             w.Close();
                         }
                     }
-                    catch (Exception exception)
+                    catch (System.Exception exception)
                     {
                         Console.WriteLine(exception.Message);
                         throw;

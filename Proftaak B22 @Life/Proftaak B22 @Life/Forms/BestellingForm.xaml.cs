@@ -1,5 +1,6 @@
 ﻿using Proftaak_B22__Life.DatabaseContext;
 using Proftaak_B22__Life.Class;
+using Proftaak_B22__Life.Exception;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,14 +85,36 @@ namespace Proftaak_B22__Life.Forms
 
         private void btnSluit_Click(object sender, RoutedEventArgs e)
         {
-            foreach(Bestelling b in bestellingcontext.GetOpenBestellingen())
+            try
             {
-                if (b.Id == selectedid && dpLever.Text!="" && dpBetaal.Text!="")
+                if (dpLever.Text != "" && dpBetaal.Text != "")
                 {
-                    bestellingcontext.SluitBestelling(b.Id, Convert.ToDateTime(dpLever.Text), Convert.ToDateTime(dpBetaal.Text));
+                    foreach (Bestelling b in bestellingcontext.GetOpenBestellingen())
+                    {
+                        if (b.Id == selectedid && dpLever.Text != "" && dpBetaal.Text != "")
+                        {
+                            bestellingcontext.SluitBestelling(b.Id, Convert.ToDateTime(dpLever.Text), Convert.ToDateTime(dpBetaal.Text));
+                        }
+                    }
+                    FillLb();
+                }
+                else if (dpBetaal.Text == "" && dpLever.Text != "")
+                {
+                    throw new SluitBestellingException("Vul een betaaldatum in");
+                }
+                else if (dpBetaal.Text != "" && dpLever.Text == "")
+                {
+                    throw new SluitBestellingException("Vul een leverdatum in");
+                }
+                else
+                {
+                    throw new SluitBestellingException("Vul een lever- en betaaldatum in");
                 }
             }
-            FillLb();
+            catch(SluitBestellingException se)
+            {
+                MessageBox.Show(se.Message);
+            }
         }
 
         private void FillLb()
@@ -109,7 +132,7 @@ namespace Proftaak_B22__Life.Forms
                     lbGesloten.Items.Add(b);
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
             }
@@ -144,19 +167,35 @@ namespace Proftaak_B22__Life.Forms
         private void btnSave_Click_1(object sender, RoutedEventArgs e)
         {
             try
-            {
+            {               
                 if (selectedid != -1)
                 {
                    bestellingcontext.UpdateBestelling(selectedid, Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpLever.Text), Convert.ToDateTime(dpBetaal.Text));
                 }
                 else
                 {
-                    bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpLever.Text), Convert.ToDateTime(dpBetaal.Text));
+                    if (dpBetaal.Text == "" && dpLever.Text == "")
+                    {
+                        bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text));
+                    }
+                    else if (dpBetaal.Text == "" && dpLever.Text != "")
+                    {
+                        bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpLever.Text));
+                    }
+                    else if (dpBetaal.Text != "" && dpLever.Text != "")
+                    {
+                        bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text), betaaldatum: Convert.ToDateTime(dpBetaal.Text));
+                    }
+                    else
+                    {
+                        bestellingcontext.InsertBestelling(Convert.ToInt32(tbKlant.Text), Convert.ToInt32(tbMedewerker.Text), Convert.ToDateTime(dpBestel.Text), Convert.ToDateTime(dpLever.Text), Convert.ToDateTime(dpBetaal.Text));
+                    }
+                    
                 }
             }
-            catch (Exception exception)
+            catch (System.Exception exception)
             {
-                Console.WriteLine(exception);
+                MessageBox.Show(exception.Message);
             }
 
             lbGesloten.Items.Clear();
@@ -196,7 +235,7 @@ namespace Proftaak_B22__Life.Forms
                 btnEdit.IsEnabled = false;
                 btnSluit.IsEnabled = false;
             }
-            catch (Exception exception)
+            catch (System.Exception exception)
             {
                 Console.WriteLine(exception);
             }

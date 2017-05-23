@@ -157,7 +157,7 @@ namespace Proftaak_B22__Life.Forms
                 //}
             }
                 
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 MessageBox.Show("Oeps! Kijk of de gegevens goed ingevuld zijn.");
                 Console.WriteLine(ex.Message);
@@ -215,7 +215,7 @@ namespace Proftaak_B22__Life.Forms
                     medewerkerContext.UpdateProfielfoto(this.currentMedewerker, profielfoto);
                     img_Profielfoto.Source = medewerkerContext.GetProfielfotoForMedewerker(this.currentMedewerker);
                 }
-                catch (Exception exception)
+                catch (System.Exception exception)
                 {
                     MessageBox.Show(exception.Message);
                 }
