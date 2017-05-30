@@ -33,6 +33,11 @@ namespace Proftaak_B22__Life.Forms
                 lb_Artikelen.Items.Add(a.ToString());
             }
             this.actief = actief;
+            cbProduct.ItemsSource = productContext.GetAllProducten();
+            cbLeverancier.ItemsSource = leverancierContext.GetAllLeveranciers();
+            gbArtikelWijzigen.IsEnabled = false;
+            btnWijzigingenOpslaan.IsEnabled = false;
+            btnVerwijderArtikel.Visibility = Visibility.Hidden;
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -52,11 +57,16 @@ namespace Proftaak_B22__Life.Forms
         {
             if (lb_Artikelen.SelectedIndex != -1)
             {
+                btnVerwijderArtikel.Visibility = Visibility.Visible;
+                gbArtikelWijzigen.IsEnabled = true;
+                btnWijzigingenOpslaan.IsEnabled = true;
+                cbWijzigenProduct.ItemsSource = productContext.GetAllProducten();
+                cbWijzigenLeverancier.ItemsSource = leverancierContext.GetAllLeveranciers();
                 selectedArtikel = lb_Artikelen.SelectedItem.ToString();
                 string leverancier = selectedArtikel.Split(' ')[1];
                 string product = selectedArtikel.Split(' ')[2];
                 lblLeverancier.Content = leverancierContext.GetLeverancierByID(Convert.ToInt32(leverancier)).Name;
-                lblProduct.Content = productContext.GetProductByID(Convert.ToInt32(product));
+                lblProduct.Content = productContext.GetProductByID(Convert.ToInt32(product)).Name;
             }
         }
 
@@ -98,7 +108,7 @@ namespace Proftaak_B22__Life.Forms
                 {
                     MessageBox.Show(ex.Message);
                 }
-       
+
             }
             else
             {
@@ -114,7 +124,7 @@ namespace Proftaak_B22__Life.Forms
         {
             try
             {
-                productContext.InsertArtikel(new Artikel(Convert.ToInt32(tbInsertProNaam.Text), Convert.ToInt32(tbInsertLevNaam.Text)));
+                productContext.InsertArtikel(new Artikel(Convert.ToInt32(cbProduct.Text.Split(' ')[0]), Convert.ToInt32(cbLeverancier.Text.Split(' ')[0])));
                 MessageBox.Show("Artikel is toegevoegd!");
                 lb_Artikelen.Items.Clear();
                 foreach (Artikel a in productContext.GetAllArtikelen())
@@ -132,8 +142,53 @@ namespace Proftaak_B22__Life.Forms
 
         private void btnArtReset_Click(object sender, RoutedEventArgs e)
         {
-            tbInsertProNaam.Clear();
-            tbInsertLevNaam.Clear();
+            cbProduct.Text = "";
+            cbLeverancier.Text = "";
+        }
+
+        private void btnWijzigingenOpslaan_Click(object sender, RoutedEventArgs e)
+        {
+            string leverancier = cbWijzigenLeverancier.Text;
+            string product = cbWijzigenProduct.Text;
+            if (!string.IsNullOrEmpty(cbWijzigenLeverancier.Text) && !string.IsNullOrEmpty(cbWijzigenProduct.Text))
+            {
+                productContext.UpdateArtikel(Convert.ToInt32(this.selectedArtikel.Split(' ')[0]), Convert.ToInt32(leverancier.Split(' ')[0]), Convert.ToInt32(product.Split(' ')[0]));
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(cbWijzigenLeverancier.Text))
+                {
+                    productContext.UpdateArtikel(Convert.ToInt32(this.selectedArtikel.Split(' ')[0]), Convert.ToInt32(leverancier.Split(' ')[0]), -1);
+                }
+                else if(!string.IsNullOrEmpty(cbWijzigenProduct.Text))
+                {
+                    productContext.UpdateArtikel(Convert.ToInt32(this.selectedArtikel.Split(' ')[0]), -1, Convert.ToInt32(product.Split(' ')[0]));
+                }
+                else
+                {
+                    MessageBox.Show("Vul gegevens in om aan te passen!");
+                    return;
+                }
+            }
+            MessageBox.Show("Artikel gewijzigd!");
+            lb_Artikelen.Items.Clear();
+            foreach (Artikel a in productContext.GetAllArtikelen())
+            {
+                lb_Artikelen.Items.Add(a.ToString());
+            }
+            cbWijzigenProduct.Text = "";
+            cbWijzigenLeverancier.Text = "";
+        }
+
+        private void btnVerwijderArtikel_Click(object sender, RoutedEventArgs e)
+        {
+            productContext.VerwijderArtikelEnOrderregel(Convert.ToInt32(this.selectedArtikel.Split(' ')[0]));
+            MessageBox.Show("Artikel verwijderd!");
+            lb_Artikelen.Items.Clear();
+            foreach (Artikel a in productContext.GetAllArtikelen())
+            {
+                lb_Artikelen.Items.Add(a.ToString());
+            }
         }
     }
 }

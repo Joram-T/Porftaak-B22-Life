@@ -76,38 +76,16 @@ namespace Proftaak_B22__Life.DatabaseContext
         }
 
 
-        public void InsertMedewerker(Medewerker medewerker)
+        public void InsertMedewerkerMetAccount(Medewerker medewerker)
         {
             using (SqlConnection connection = Database.Connection)
             {
-                // eerst het account id krijgen van het laatst geinserte account
-                int LastAccountID = 0;
-                string query = "SELECT MAX(account_id) FROM Account";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                    
+                using (SqlCommand command = new SqlCommand("spInsertMedewerkerMetAccount", connection))
                 {
-                    try
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                LastAccountID = Convert.ToInt32(reader[0]);
-                            }
-                        }
-                    }
-                    catch (System.Exception e)
-                    {
-
-                        throw e;
-                    }
-                }
-                    //daarna een medewerker inserten met het verkregen accountid
-                    query = "INSERT INTO Medewerker VALUES(NULL, NULL, @account_id, @voornaam, @achternaam, @tussenvoegsel, @adres, @woonplaats)";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    //command.Parameters.AddWithValue("@profielfoto", DBNull.Value);
-                    //command.Parameters.AddWithValue("@manager_id", DBNull.Value);
-                    command.Parameters.AddWithValue("@account_id", Convert.ToInt32(LastAccountID));
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@email", medewerker.Account.Email);
+                    command.Parameters.AddWithValue("@wachtwoord", medewerker.Account.Wachtwoord);
                     command.Parameters.AddWithValue("@voornaam", medewerker.FirstName);
                     command.Parameters.AddWithValue("@achternaam", medewerker.LastName);
                     command.Parameters.AddWithValue("@tussenvoegsel", medewerker.Insertion);
@@ -119,8 +97,7 @@ namespace Proftaak_B22__Life.DatabaseContext
                     }
                     catch (System.Exception e)
                     {
-
-                        Console.WriteLine(e.Message);
+                        throw e;
                     }
                 }
             }

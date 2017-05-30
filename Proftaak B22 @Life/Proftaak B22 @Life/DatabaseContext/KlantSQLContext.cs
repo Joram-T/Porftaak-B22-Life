@@ -86,6 +86,27 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
         }
 
+        public void DeleteKlantEnBestellingen(Klant klant)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                using (SqlCommand command = new SqlCommand("spVerwijderKlantEnBestellingen", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@klant_id", klant.ID);
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (System.Exception e)
+                    {
+
+                        throw e;
+                    }
+                }
+            }
+        }
+
         public Klant GetKlantByID(int id)
         {
             using (SqlConnection connection = Database.Connection)

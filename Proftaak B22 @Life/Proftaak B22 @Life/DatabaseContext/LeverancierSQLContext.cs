@@ -1,6 +1,7 @@
 ﻿using Proftaak_B22__Life.Class;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -74,6 +75,33 @@ namespace Proftaak_B22__Life.DatabaseContext
                 }
             }
         }
+
+        public void UpdateLeverancier(Leverancier leverancier, string naam, string adres, string stad)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+
+                using (SqlCommand command = new SqlCommand("spUpdateLeverancier", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@leverancier_id", leverancier.ID);
+                    command.Parameters.AddWithValue("@naam", naam);
+                    command.Parameters.AddWithValue("@adres", adres);
+                    command.Parameters.AddWithValue("@stad", stad);
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (System.Exception e)
+                    {
+                        throw e;
+                    }
+                }
+
+            }
+        }
+
 
 
         private Leverancier CreateLeverancierFromReader(SqlDataReader reader)

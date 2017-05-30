@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Proftaak_B22__Life.Class;
+using Proftaak_B22__Life.DatabaseContext;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +22,13 @@ namespace Proftaak_B22__Life.Forms
     public partial class MenuForm : Window
     {
         private List<Window> actief = new List<Window>();
+        BestellingSQLContext bestellingContext = new BestellingSQLContext();
         public MenuForm()
         {
             InitializeComponent();
-            
+
+            lblAantalOrders.Content = bestellingContext.GetAantalOrdersHuidigeMaand().ToString();
+            cbJaar.ItemsSource = bestellingContext.GetJaartallenOrders(); 
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -125,6 +130,22 @@ namespace Proftaak_B22__Life.Forms
             {
                 actief.Add(pf);
                 pf.Show();
+            }
+        }
+
+        private void btnToon_Click(object sender, RoutedEventArgs e)
+        {
+            listView.Items.Clear();
+            try
+            {
+                foreach (ListViewObjectMaandOrder lvob in bestellingContext.GetAantalOrdersPerMaandPerJaar(Convert.ToInt32(cbJaar.Text)))
+                {
+                    listView.Items.Add(new string[] { lvob.Maand.ToString(), lvob.AantalOrders.ToString() });
+                }
+            }
+            catch (System.Exception)
+            {
+                MessageBox.Show("Er is iets fout gegaan");
             }
         }
     }

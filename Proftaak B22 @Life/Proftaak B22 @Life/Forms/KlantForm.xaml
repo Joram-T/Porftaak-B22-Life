@@ -50,7 +50,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btnWijzigGegevensKlant" Content="Wijzig gegevens" HorizontalAlignment="Left" Margin="339,278,0,0" VerticalAlignment="Top" Width="101" Height="19.2" Click="btnWijzigGegevensKlant_Click"/>
+        <Button x:Name="btnWijzigGegevensKlant" Content="Wijzig gegevens" HorizontalAlignment="Left" Margin="438,280,0,0" VerticalAlignment="Top" Width="101" Height="19" Click="btnWijzigGegevensKlant_Click"/>
+        <Button x:Name="btnDelete" Content="Verwijder klant" HorizontalAlignment="Left" Margin="339,280,0,0" VerticalAlignment="Top" Width="94" Click="btnDelete_Click"/>
 
     </Grid>
 </Window>

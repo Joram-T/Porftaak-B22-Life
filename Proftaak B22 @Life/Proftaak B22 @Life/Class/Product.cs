@@ -32,7 +32,7 @@ namespace Proftaak_B22__Life.Class
 
         public override string ToString()
         {
-            return this.Name;
+            return this.ID + " " + this.Name;
         }
     }
 }

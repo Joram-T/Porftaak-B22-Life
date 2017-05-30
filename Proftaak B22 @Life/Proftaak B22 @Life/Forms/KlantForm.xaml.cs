@@ -31,6 +31,8 @@ namespace Proftaak_B22__Life.Forms
         {
             InitializeComponent();
             btnWijzigGegevensKlant.Visibility = Visibility.Hidden;
+            btnDelete.Visibility = Visibility.Hidden;
+
             this.actief = actief;
             foreach (Klant klant in klantContext.GetAllKlanten())
             {
@@ -106,7 +108,7 @@ namespace Proftaak_B22__Life.Forms
                     lb_Klanten.Items.Add(k.ToString());
                 }
             }
-            
+
         }
 
         private void btnKlantToevoegenReset_Click(object sender, RoutedEventArgs e)
@@ -123,6 +125,7 @@ namespace Proftaak_B22__Life.Forms
         {
             if (lb_Klanten.SelectedIndex != -1)
             {
+                btnDelete.Visibility = Visibility.Visible;
                 btnWijzigGegevensKlant.Visibility = Visibility.Visible;
                 selectedklant = lb_Klanten.SelectedItem.ToString();
                 int id = Convert.ToInt32(selectedklant.Split(' ')[0]);
@@ -187,6 +190,40 @@ namespace Proftaak_B22__Life.Forms
         {
             WijzigGegevens wg = new WijzigGegevens(this.currentKlant);
             wg.Show();
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            string messageBoxText = "Klant met alle bestellingen verwijderen?";
+            string caption = "Klant verwijderen";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+
+            // Display message box
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+
+            // Process message box results
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    try
+                    {
+                        klantContext.DeleteKlantEnBestellingen(this.currentKlant);
+                        lb_Klanten.Items.Clear();
+                        foreach (Klant k in klantContext.GetAllKlanten())
+                        {
+                            lb_Klanten.Items.Add(k.ToString());
+                        }
+                    }
+                    catch (System.Exception exception)
+                    {
+                        Console.WriteLine(exception.Message);
+                        throw;
+                    }
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
         }
     }
 }

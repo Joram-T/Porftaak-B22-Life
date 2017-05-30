@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Forms\BestellingToevoegenForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\LeverancierForm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +83,7 @@
     <Compile Include="Class\Artikel.cs" />
     <Compile Include="Class\Bestelling.cs" />
     <Compile Include="Class\Leverancier.cs" />
+    <Compile Include="Class\ListViewObjectMaandOrder.cs" />
     <Compile Include="DatabaseContext\BestellingSQLContext.cs" />
     <Compile Include="DatabaseContext\Database.cs" />
     <Compile Include="Class\Klant.cs" />
@@ -90,6 +95,9 @@
     <Compile Include="DatabaseContext\MedewerkerSQLContext.cs" />
     <Compile Include="DatabaseContext\ProductSQLContext.cs" />
     <Compile Include="Exceptions\SluitBestellingException.cs" />
+    <Compile Include="Forms\BestellingToevoegenForm.xaml.cs">
+      <DependentUpon>BestellingToevoegenForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LeverancierForm.xaml.cs">
       <DependentUpon>LeverancierForm.xaml</DependentUpon>
     </Compile>
@@ -115,7 +123,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\SluitBestellingForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\WijzigBestelling.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\WijzigGegevens.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\WijzigLeverancierGegevens.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -131,8 +151,17 @@
     <Compile Include="Forms\ProductForm.xaml.cs">
       <DependentUpon>ProductForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SluitBestellingForm.xaml.cs">
+      <DependentUpon>SluitBestellingForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\WijzigBestelling.xaml.cs">
+      <DependentUpon>WijzigBestelling.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\WijzigGegevens.xaml.cs">
       <DependentUpon>WijzigGegevens.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\WijzigLeverancierGegevens.xaml.cs">
+      <DependentUpon>WijzigLeverancierGegevens.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

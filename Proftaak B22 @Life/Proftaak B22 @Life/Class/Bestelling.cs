@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Proftaak_B22__Life.Class
 {
-    class Bestelling
+   public class Bestelling
     {
         public int Id { get; }
         public int Klant { get; }

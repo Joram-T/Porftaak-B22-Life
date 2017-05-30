@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Proftaak_B22__Life.Class;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Proftaak_B22__Life.DatabaseContext
 {
@@ -23,6 +24,26 @@ namespace Proftaak_B22__Life.DatabaseContext
                         while (reader.Read())
                         {
                             result.Add(CreateArtikelFromReader(reader));
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+        public List<Product> GetAllProducten()
+        {
+            List<Product> result = new List<Product>();
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "SELECT * FROM Product";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(CreateProductFromReader(reader));
                         }
                     }
                 }
@@ -51,6 +72,49 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
         }
 
+
+
+        public void UpdateArtikel(int artikelID, int leverancierid, int productid)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+
+                using (SqlCommand command = new SqlCommand("spUpdateArtikel", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@artikel_id", artikelID);
+                    if (leverancierid != -1)
+                    {
+                        command.Parameters.AddWithValue("@leverancier_id", leverancierid);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@leverancier_id", null);
+                    }
+                    if (productid != -1)
+                    {
+                        command.Parameters.AddWithValue("@product_id", productid);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@product_id", null);
+                    }
+                    
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (System.Exception e)
+                    {
+                        throw e;
+                    }
+                }
+
+            }
+        }
+
+
         public Product GetProductByID(int id)
         {
             using (SqlConnection connection = Database.Connection)
@@ -70,6 +134,27 @@ namespace Proftaak_B22__Life.DatabaseContext
                 }
             }
         }
+
+        public void VerwijderArtikelEnOrderregel(int artikelID)
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                using (SqlCommand command = new SqlCommand("spVerwijderArtikelEnOrderregel", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@artikel_id", artikelID);
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (System.Exception e)
+                    {
+                        throw e;
+                    }
+                }
+            }
+        }
+
 
         private Product CreateProductFromReader(SqlDataReader reader)
         {

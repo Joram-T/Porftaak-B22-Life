@@ -5,13 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Proftaak_B22__Life.Forms"
         mc:Ignorable="d"
-        Title="@Life - Menu" Height="165" Width="280">
+        Title="@Life - Menu" Height="366.6" Width="280">
     <Grid>
         <Button x:Name="btnWerknemers" Content="Werknemers" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="10,10,0,0" Height="35" Click="btnWerknemers_Click"/>
         <Button x:Name="btnBestellingen" Content="Bestellingen" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="10,50,0,0" Height="35" Click="btnBestellingen_Click"/>
         <Button x:Name="btnLeveranciers" Content="Leveranciers" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="10,90,0,0" Height="35" Click="btnLeveranciers_Click"/>
         <Button x:Name="btnKlanten" Content="Klanten" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="138,10,0,0" Height="35" Click="btnKlanten_Click"/>
         <Button x:Name="btnArtikel" Content="Artikel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="138,50,0,0" Height="35" Click="btnArtikel_Click"/>
+        <Label x:Name="label" Content="Aantal orders deze maand:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblAantalOrders" Content="" HorizontalAlignment="Left" Margin="161,121,0,0" VerticalAlignment="Top" Width="72" FontSize="20" FontWeight="Bold"/>
+        <Label x:Name="label_Copy" Content="Aantal orders per maand in :" HorizontalAlignment="Left" Margin="9,155,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbJaar" HorizontalAlignment="Left" Margin="174,158,0,0" VerticalAlignment="Top" Width="79"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="141" Margin="10,186,0,0" VerticalAlignment="Top" Width="152">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Maand" DisplayMemberBinding="{Binding [0]}"/>
+                    <GridViewColumn Header="Aantal orders" DisplayMemberBinding="{Binding [1]}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="btnToon" Content="Toon" HorizontalAlignment="Left" Margin="174,188,0,0" VerticalAlignment="Top" Width="75" Click="btnToon_Click"/>
 
     </Grid>
 </Window>

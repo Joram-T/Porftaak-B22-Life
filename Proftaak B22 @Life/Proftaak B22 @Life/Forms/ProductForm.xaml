@@ -19,7 +19,7 @@
                 <DropShadowEffect/>
             </ListBox.Effect>
         </ListBox>
-        <GroupBox x:Name="gbArtToevoegen" Header="Artikel toevoegen" HorizontalAlignment="Left" Margin="370.6,246,0,0" VerticalAlignment="Top" Height="193" Width="330" Grid.Column="1">
+        <GroupBox x:Name="gbArtToevoegen" Header="Artikel toevoegen" HorizontalAlignment="Left" Margin="342.6,191,0,0" VerticalAlignment="Top" Height="193" Width="330" Grid.Column="1">
             <Grid HorizontalAlignment="Left" Margin="-6,3,-12.4,14" Width="336">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
@@ -27,17 +27,27 @@
                     <ColumnDefinition Width="0*"/>
                     <ColumnDefinition Width="224*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="tbInsertProNaam" HorizontalAlignment="Left" Height="26" Margin="1,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193" Grid.Column="3"/>
                 <Label x:Name="label" Content="Product" HorizontalAlignment="Left" Margin="6.8,10,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="74"/>
-                <TextBox x:Name="tbInsertLevNaam" HorizontalAlignment="Left" Height="23" Margin="1,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193" Grid.Column="3"/>
                 <Label x:Name="lblAdres" Content="Leverancier" HorizontalAlignment="Left" Margin="6.8,42,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="74"/>
                 <Button x:Name="btnArtToevoegen" Content="Toevoegen" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top" Width="75" Click="btnArtToevoegen_Click" Grid.Column="3" Height="19"/>
                 <Button x:Name="btnArtReset" Content="Reset" HorizontalAlignment="Left" Margin="119,119,0,0" VerticalAlignment="Top" Width="75" Click="btnArtReset_Click" Grid.Column="3" Height="19"/>
+                <ComboBox x:Name="cbProduct" Grid.Column="3" HorizontalAlignment="Left" Margin="32,10,0,0" VerticalAlignment="Top" Width="162" Height="26"/>
+                <ComboBox x:Name="cbLeverancier" Grid.Column="3" HorizontalAlignment="Left" Margin="32,42,0,0" VerticalAlignment="Top" Width="162" Height="26"/>
             </Grid>
         </GroupBox>
         <Label Content="Leverancier" HorizontalAlignment="Left" Margin="342.6,34,0,0" VerticalAlignment="Top" Height="64" Width="166" FontSize="24" Grid.Column="1"/>
         <Label Content="Product" HorizontalAlignment="Left" Margin="551.6,34,0,0" VerticalAlignment="Top" Height="64" Width="166" FontSize="24" Grid.Column="1"/>
         <Label x:Name="lblProduct" Content="" HorizontalAlignment="Left" Margin="546.6,92,0,0" VerticalAlignment="Top" Height="64" Width="205" FontSize="30" FontWeight="Bold" Grid.Column="1"/>
+        <GroupBox x:Name="gbArtikelWijzigen" Grid.Column="1" Header="Artikel wijzigen" HorizontalAlignment="Left" Margin="342.6,409,0,0" VerticalAlignment="Top" Height="189" Width="330">
+            <Grid HorizontalAlignment="Left" Height="151" Margin="10,10,-2.4,0" VerticalAlignment="Top" Width="310">
+                <Label x:Name="label_Copy" Content="Product" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="74"/>
+                <Label x:Name="lblAdres_Copy" Content="Leverancier" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" Height="26" Width="74"/>
+                <ComboBox x:Name="cbWijzigenProduct" HorizontalAlignment="Left" Margin="129,14,0,0" VerticalAlignment="Top" Width="171" Height="22"/>
+                <ComboBox x:Name="cbWijzigenLeverancier" HorizontalAlignment="Left" Margin="129,46,0,0" VerticalAlignment="Top" Width="171" Height="22"/>
+            </Grid>
+        </GroupBox>
+        <Button x:Name="btnWijzigingenOpslaan" Content="Opslaan" Grid.Column="1" HorizontalAlignment="Left" Margin="574.6,554,0,0" VerticalAlignment="Top" Width="75" Click="btnWijzigingenOpslaan_Click"/>
+        <Button x:Name="btnVerwijderArtikel" Content="Verwijder artikel" Grid.Column="1" HorizontalAlignment="Left" Margin="9.6,603,0,0" VerticalAlignment="Top" Width="111" Height="24" Click="btnVerwijderArtikel_Click"/>
 
     </Grid>
 </Window>

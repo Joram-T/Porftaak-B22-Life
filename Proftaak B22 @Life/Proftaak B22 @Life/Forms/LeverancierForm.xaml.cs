@@ -23,7 +23,7 @@ namespace Proftaak_B22__Life.Forms
     {
         private LeverancierSQLContext leverancierContext = new LeverancierSQLContext();
         private List<Window> actief;
-        string selectedLeverancier = "";
+        Leverancier Leverancier;
         public LeverancierForm(List<Window> actief)
         {
             InitializeComponent();
@@ -33,6 +33,8 @@ namespace Proftaak_B22__Life.Forms
                 lb_Leveranciers.Items.Add(l.ToString());
             }
             this.actief = actief;
+            btnGegevensWijzigen.Visibility = Visibility.Hidden;
+            btnVerwijderenLeverancier.Visibility = Visibility.Hidden;
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -52,11 +54,13 @@ namespace Proftaak_B22__Life.Forms
         {
             if (lb_Leveranciers.SelectedIndex != -1)
             {
-                selectedLeverancier = lb_Leveranciers.SelectedItem.ToString();
-                int id = Convert.ToInt32(selectedLeverancier.Split(' ')[0]);
-                lblNaamLeverancier.Content = leverancierContext.GetLeverancierByID(id).Name;
-                lblAdresLeverancier.Content = leverancierContext.GetLeverancierByID(id).Address;
-                lblStadLeverancier.Content = leverancierContext.GetLeverancierByID(id).City;
+                btnGegevensWijzigen.Visibility = Visibility.Visible;
+                string selectedLeverancier = lb_Leveranciers.SelectedItem.ToString();
+                int selectedLeverancierID = Convert.ToInt32(selectedLeverancier.Split(' ')[0]);
+                this.Leverancier = leverancierContext.GetLeverancierByID(selectedLeverancierID);
+                lblNaamLeverancier.Content = Leverancier.Name;
+                lblAdresLeverancier.Content = Leverancier.Address;
+                lblStadLeverancier.Content = Leverancier.City;
             }
         }
 
@@ -131,6 +135,30 @@ namespace Proftaak_B22__Life.Forms
             tbInsertLevAdres.Clear();
             tbInsertLevNaam.Clear();
             tbInsertLevStad.Clear();
+        }
+
+        private void btnGegevensWijzigen_Click(object sender, RoutedEventArgs e)
+        {
+            WijzigLeverancierGegevens wlg = new WijzigLeverancierGegevens(this.Leverancier);
+            wlg.Show();
+        }
+
+        public void RefreshLeverancierData()
+        {
+            lb_Leveranciers.Items.Clear();
+            foreach (Leverancier l in leverancierContext.GetAllLeveranciers())
+            {
+                lb_Leveranciers.Items.Add(l.ToString());
+            }
+            Leverancier updatedleverancier = leverancierContext.GetLeverancierByID(this.Leverancier.ID);
+            lblNaamLeverancier.Content = updatedleverancier.Name;
+            lblAdresLeverancier.Content = updatedleverancier.Address;
+            lblStadLeverancier.Content = updatedleverancier.City;
+        }
+
+        private void btnVerwijderenLeverancier_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

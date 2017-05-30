@@ -30,7 +30,7 @@ namespace Proftaak_B22__Life.Forms
         private List<Window> actief;
         string selectedwerknemer = "";
         Medewerker currentMedewerker;
-       
+
         public MedewerkerForm(List<Window> actief)
         {
             InitializeComponent();
@@ -61,7 +61,7 @@ namespace Proftaak_B22__Life.Forms
             if (lb_Werknemers.SelectedIndex != -1)
             {
                 btnVeranderProfielfoto.Visibility = Visibility.Visible;
-                btnWijzigGegevens.Visibility = Visibility.Visible; 
+                btnWijzigGegevens.Visibility = Visibility.Visible;
                 selectedwerknemer = lb_Werknemers.SelectedItem.ToString();
                 int id = Convert.ToInt32(selectedwerknemer.Split(' ')[0]);
                 lblNaamWerknemer.Content = medewerkerContext.GetMedewerkerByID(id).Insertion + " " + medewerkerContext.GetMedewerkerByID(id).LastName + ", " + medewerkerContext.GetMedewerkerByID(id).FirstName;
@@ -129,37 +129,29 @@ namespace Proftaak_B22__Life.Forms
         {
             try
             {
-                //if (tbInsertMedEmail.Text != "" || tbInsertMedWachtwoord.Text != "" || tbInsertMedAchternaam.Text != "" || tbInsertMedNaam.Text != "")
-                //{
-                    Account account = new Account(tbInsertMedEmail.Text, tbInsertMedWachtwoord.Text);
-                    if (accountContext.Login(account) != null)
+                Account account = new Account(tbInsertMedEmail.Text, tbInsertMedWachtwoord.Text);
+                if (accountContext.Login(account) != null)
+                {
+                    MessageBox.Show("Er is al een account met deze gegevens!");
+                }
+                else
+                {
+                    Medewerker medewerker = new Medewerker(account, tbInsertMedNaam.Text, tbInsertMedTussenvoegsel.Text, tbInsertMedAchternaam.Text, tbInsertMedAdres.Text, tbInsertMedStad.Text);
+                    medewerkerContext.InsertMedewerkerMetAccount(medewerker);
+                    MessageBox.Show("Medewerker is toegevoegd!");
+                    lb_Werknemers.Items.Clear();
+                    foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
                     {
-                        MessageBox.Show("Er is al een medewerker met deze inloggegevens!");
+                        lb_Werknemers.Items.Add(m.ToString());
                     }
-                    else
-                    {
-                        accountContext.InsertAccount(account);
-                        medewerkerContext.InsertMedewerker(new Medewerker(account, tbInsertMedNaam.Text,
-                            tbInsertMedTussenvoegsel.Text, tbInsertMedAchternaam.Text, tbInsertMedAdres.Text,
-                            tbInsertMedStad.Text));
-                        MessageBox.Show("Medewerker is toegevoegd!");
-                        lb_Werknemers.Items.Clear();
-                        foreach (Medewerker m in medewerkerContext.GetAllMedewerkers())
-                        {
-                            lb_Werknemers.Items.Add(m.ToString());
-                        }
-                    }
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Gelieve alle velden in te vullen!");
-                //}
+                }       
             }
-                
+
             catch (System.Exception ex)
             {
-                MessageBox.Show("Oeps! Kijk of de gegevens goed ingevuld zijn.");
-                Console.WriteLine(ex.Message);
+                //MessageBox.Show("Oeps! Kijk of de gegevens goed ingevuld zijn.");
+                //Console.WriteLine(ex.Message);
+                throw ex;
             }
 
 
@@ -179,7 +171,7 @@ namespace Proftaak_B22__Life.Forms
         private void lbBestellingen_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lbBestellingen.SelectedIndex != -1)
-            { 
+            {
                 string selectedbestelling = lbBestellingen.SelectedItem.ToString();
                 int id = Convert.ToInt32(string.Join("", selectedbestelling.Split(',')[0].ToCharArray().Where(Char.IsDigit)));
                 lv_BestellingArtikelen.Items.Clear();
@@ -196,7 +188,7 @@ namespace Proftaak_B22__Life.Forms
                         status = "In behandeling";
                     }
                     Product artikelproduct = productContext.GetProductByID(a.Productid);
-                    lv_BestellingArtikelen.Items.Add(new string[] { a.Artikelid.ToString(), artikelproduct.Name, "€"+artikelproduct.Price.ToString(), status });
+                    lv_BestellingArtikelen.Items.Add(new string[] { a.Artikelid.ToString(), artikelproduct.Name, "€" + artikelproduct.Price.ToString(), status });
                 }
             }
         }
@@ -205,7 +197,7 @@ namespace Proftaak_B22__Life.Forms
         {
             OpenFileDialog open = new OpenFileDialog();
             open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
-            
+
             if (open.ShowDialog() == true)
             {
                 byte[] profielfoto = File.ReadAllBytes(open.FileName);
@@ -222,10 +214,10 @@ namespace Proftaak_B22__Life.Forms
         }
 
         private void btnWijzigGegevens_Click(object sender, RoutedEventArgs e)
-        {   
+        {
             WijzigGegevens wg = new WijzigGegevens(this.currentMedewerker);
             wg.Show();
         }
-        
+
     }
 }

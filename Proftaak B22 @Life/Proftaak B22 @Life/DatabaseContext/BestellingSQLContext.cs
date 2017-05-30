@@ -1,6 +1,7 @@
 ﻿using Proftaak_B22__Life.Class;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace Proftaak_B22__Life.DatabaseContext
             List<Bestelling> result = new List<Bestelling>();
             using (SqlConnection connection = Database.Connection)
             {
-                string query = "SELECT * FROM \"Order\" where betaaldatum is null order by besteldatum";
+                string query = "SELECT * FROM [Order] where betaaldatum is null order by besteldatum";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -37,7 +38,7 @@ namespace Proftaak_B22__Life.DatabaseContext
             List<Bestelling> result = new List<Bestelling>();
             using (SqlConnection connection = Database.Connection)
             {
-                string query = "SELECT * FROM \"Order\" where betaaldatum is not null order by besteldatum";
+                string query = "SELECT * FROM [Order] where betaaldatum is not null order by besteldatum";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -56,7 +57,7 @@ namespace Proftaak_B22__Life.DatabaseContext
         {
             using (SqlConnection connection = Database.Connection)
             {
-                string query = "SELECT * FROM \"Order\" WHERE order_id = @order_id";
+                string query = "SELECT * FROM [Order] WHERE order_id = @order_id";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@order_id", id);
@@ -150,16 +151,31 @@ namespace Proftaak_B22__Life.DatabaseContext
             }
         }
 
-        public void UpdateBestelling(int id, DateTime besteldatum, DateTime? leverdatum = null, DateTime? betaaldatum = null)
+        public void UpdateBestelling(int id, Klant klant, Medewerker medewerker, DateTime? besteldatum, DateTime? leverdatum, DateTime? betaaldatum)
         {
             using (SqlConnection connection = Database.Connection)
             {
-                string query = "Update \"Order\" SET besteldatum = @besteldatum, leverdatum = @leverdatum, betaaldatum = @betaaldatum where order_id=@id";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                
+                using (SqlCommand command = new SqlCommand("spUpdateBestelling", connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@id", id);
-                    command.Parameters.AddWithValue("@klant_id", id);
-                    command.Parameters.AddWithValue("@medewerker_id", id);
+                    if (klant != null)
+                    {
+                        command.Parameters.AddWithValue("@klant_id", klant.ID);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@klant_id", DBNull.Value);
+                    }
+                    if (medewerker != null)
+                    {
+                        command.Parameters.AddWithValue("@medewerker_id", medewerker.ID);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@medewerker_id", DBNull.Value);
+                    }
                     command.Parameters.AddWithValue("@besteldatum", besteldatum);
                     command.Parameters.AddWithValue("@leverdatum", leverdatum);
                     command.Parameters.AddWithValue("@betaaldatum", betaaldatum);
@@ -183,6 +199,68 @@ namespace Proftaak_B22__Life.DatabaseContext
                 string query = "SELECT MAX(order_id) FROM \"Order\"";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            return Convert.ToInt32(reader[0]);
+                        }
+                        return 0;
+                    }
+                }
+            }
+
+        }
+        public List<ListViewObjectMaandOrder> GetAantalOrdersPerMaandPerJaar(int jaar)
+        {
+            List<ListViewObjectMaandOrder> lijst = new List<ListViewObjectMaandOrder>();
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "select datepart(mm, besteldatum) AS Maand, count(order_id) as Aantal FROM[order] WHERE datepart(yyyy, besteldatum) = @jaar group by datepart(mm, besteldatum)";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@jaar", jaar);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lijst.Add(new ListViewObjectMaandOrder(Convert.ToInt32(reader["Maand"]), Convert.ToInt32(reader["Aantal"])));
+                        }
+                        return lijst;
+                    }
+                }
+            }
+
+        }
+
+        public List<int> GetJaartallenOrders()
+        {
+            List<int> lijst = new List<int>();
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "select distinct Datepart(yyyy, besteldatum) as Jaartal from [order]";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lijst.Add(Convert.ToInt32(reader["Jaartal"]));
+                        }
+                        return lijst;
+                    }
+                }
+            }
+        }
+
+        public int GetAantalOrdersHuidigeMaand()
+        {
+            using (SqlConnection connection = Database.Connection)
+            {
+                string query = "select count(order_id) FROM[order] WHERE DATEPART(mm, besteldatum) = @maand ";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@maand", DateTime.Now.Date.Month);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
